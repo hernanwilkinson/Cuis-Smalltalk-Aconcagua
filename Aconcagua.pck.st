@@ -1,11 +1,11 @@
-'From Cuis 5.0 of 7 November 2016 [latest update: #3064] on 27 March 2017 at 9:48:28 am'!
+'From Cuis 5.0 of 7 November 2016 [latest update: #3147] on 22 August 2017 at 4:38:21 pm'!
 'Description Implementation of measure arithmethics. 
 
 Presented at OOSPLA 2005: https://www.dropbox.com/s/7mjic72ab3a0oll/pr06-wilkinson.pdf?dl=0
 You can read a FAQ here: https://www.dropbox.com/s/vcsxv26pqbzji44/Measure%20FAQ.doc?dl=0
 
 It has some changes to the paper but there are some more I''d like to do like less exceptions and better tests'!
-!provides: 'Aconcagua' 1 3!
+!provides: 'Aconcagua' 1 4!
 !classDefinition: #CompoundMeasureFraction category: #'Aconcagua-MeasureModel'!
 Fraction subclass: #CompoundMeasureFraction
 	instanceVariableNames: ''
@@ -46,6 +46,36 @@ SequenceableCollection variableSubclass: #ArithmeticObjectInterval
 ArithmeticObjectInterval class
 	instanceVariableNames: ''!
 
+!classDefinition: #IndeterminateOperationException category: #'Aconcagua-MeasureModel'!
+Error subclass: #IndeterminateOperationException
+	instanceVariableNames: 'operation leftOperand rightOperand'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Aconcagua-MeasureModel'!
+!classDefinition: 'IndeterminateOperationException class' category: #'Aconcagua-MeasureModel'!
+IndeterminateOperationException class
+	instanceVariableNames: ''!
+
+!classDefinition: #InvalidProportionalUnitConversionFunctionException category: #'Aconcagua-MeasureModel'!
+Error subclass: #InvalidProportionalUnitConversionFunctionException
+	instanceVariableNames: 'sourceMeasure equivalentMeasure'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Aconcagua-MeasureModel'!
+!classDefinition: 'InvalidProportionalUnitConversionFunctionException class' category: #'Aconcagua-MeasureModel'!
+InvalidProportionalUnitConversionFunctionException class
+	instanceVariableNames: ''!
+
+!classDefinition: #NoUnitConversionRuleException category: #'Aconcagua-MeasureModel'!
+Error subclass: #NoUnitConversionRuleException
+	instanceVariableNames: 'targetUnit sourceUnit'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Aconcagua-MeasureModel'!
+!classDefinition: 'NoUnitConversionRuleException class' category: #'Aconcagua-MeasureModel'!
+NoUnitConversionRuleException class
+	instanceVariableNames: ''!
+
 !classDefinition: #IndexOutOfRangeException category: #'Aconcagua-ArithmeticModel'!
 Error subclass: #IndexOutOfRangeException
 	instanceVariableNames: 'index collection'
@@ -76,6 +106,16 @@ Error subclass: #InvalidOperationException
 InvalidOperationException class
 	instanceVariableNames: ''!
 
+!classDefinition: #CanNotConvertMeasureException category: #'Aconcagua-MeasureModel'!
+InvalidOperationException subclass: #CanNotConvertMeasureException
+	instanceVariableNames: 'targetUnit sourceMeasure'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Aconcagua-MeasureModel'!
+!classDefinition: 'CanNotConvertMeasureException class' category: #'Aconcagua-MeasureModel'!
+CanNotConvertMeasureException class
+	instanceVariableNames: ''!
+
 !classDefinition: #InvalidBinaryOperationException category: #'Aconcagua-ArithmeticModel'!
 InvalidOperationException subclass: #InvalidBinaryOperationException
 	instanceVariableNames: 'operationName leftOperand rightOperand'
@@ -94,16 +134,6 @@ InvalidOperationException subclass: #InvalidUnaryOperationException
 	category: 'Aconcagua-ArithmeticModel'!
 !classDefinition: 'InvalidUnaryOperationException class' category: #'Aconcagua-ArithmeticModel'!
 InvalidUnaryOperationException class
-	instanceVariableNames: ''!
-
-!classDefinition: #CanNotConvertMeasureException category: #'Aconcagua-MeasureModel'!
-InvalidOperationException subclass: #CanNotConvertMeasureException
-	instanceVariableNames: 'targetUnit sourceMeasure'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Aconcagua-MeasureModel'!
-!classDefinition: 'CanNotConvertMeasureException class' category: #'Aconcagua-MeasureModel'!
-CanNotConvertMeasureException class
 	instanceVariableNames: ''!
 
 !classDefinition: #UndefinedArithmeticObjectValueException category: #'Aconcagua-ArithmeticModel'!
@@ -154,36 +184,6 @@ Error subclass: #NodeNotFoundException
 	category: 'Aconcagua-GraphModel'!
 !classDefinition: 'NodeNotFoundException class' category: #'Aconcagua-GraphModel'!
 NodeNotFoundException class
-	instanceVariableNames: ''!
-
-!classDefinition: #IndeterminateOperationException category: #'Aconcagua-MeasureModel'!
-Error subclass: #IndeterminateOperationException
-	instanceVariableNames: 'operation leftOperand rightOperand'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Aconcagua-MeasureModel'!
-!classDefinition: 'IndeterminateOperationException class' category: #'Aconcagua-MeasureModel'!
-IndeterminateOperationException class
-	instanceVariableNames: ''!
-
-!classDefinition: #InvalidProportionalUnitConversionFunctionException category: #'Aconcagua-MeasureModel'!
-Error subclass: #InvalidProportionalUnitConversionFunctionException
-	instanceVariableNames: 'sourceMeasure equivalentMeasure'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Aconcagua-MeasureModel'!
-!classDefinition: 'InvalidProportionalUnitConversionFunctionException class' category: #'Aconcagua-MeasureModel'!
-InvalidProportionalUnitConversionFunctionException class
-	instanceVariableNames: ''!
-
-!classDefinition: #NoUnitConversionRuleException category: #'Aconcagua-MeasureModel'!
-Error subclass: #NoUnitConversionRuleException
-	instanceVariableNames: 'targetUnit sourceUnit'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Aconcagua-MeasureModel'!
-!classDefinition: 'NoUnitConversionRuleException class' category: #'Aconcagua-MeasureModel'!
-NoUnitConversionRuleException class
 	instanceVariableNames: ''!
 
 !classDefinition: #ArithmeticObjectIntervalStrategyTest category: #'Aconcagua-ArithmeticModelTests'!
@@ -466,196 +466,6 @@ TestResource subclass: #UnitsTestResource
 UnitsTestResource class
 	instanceVariableNames: ''!
 
-!classDefinition: #ArithmeticObject category: #'Aconcagua-ArithmeticModel'!
-Object subclass: #ArithmeticObject
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Aconcagua-ArithmeticModel'!
-!classDefinition: 'ArithmeticObject class' category: #'Aconcagua-ArithmeticModel'!
-ArithmeticObject class
-	instanceVariableNames: ''!
-
-!classDefinition: #Evaluation category: #'Aconcagua-MeasureModel'!
-ArithmeticObject subclass: #Evaluation
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Aconcagua-MeasureModel'!
-!classDefinition: 'Evaluation class' category: #'Aconcagua-MeasureModel'!
-Evaluation class
-	instanceVariableNames: ''!
-
-!classDefinition: #CachedEvaluation category: #'Aconcagua-MeasureModel'!
-Evaluation subclass: #CachedEvaluation
-	instanceVariableNames: 'cachedValue evaluation'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Aconcagua-MeasureModel'!
-!classDefinition: 'CachedEvaluation class' category: #'Aconcagua-MeasureModel'!
-CachedEvaluation class
-	instanceVariableNames: ''!
-
-!classDefinition: #DummyEvaluation category: #'Aconcagua-MeasureModelTests'!
-Evaluation subclass: #DummyEvaluation
-	instanceVariableNames: 'measure'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Aconcagua-MeasureModelTests'!
-!classDefinition: 'DummyEvaluation class' category: #'Aconcagua-MeasureModelTests'!
-DummyEvaluation class
-	instanceVariableNames: ''!
-
-!classDefinition: #InfinityDefinition category: #'Aconcagua-MeasureModel'!
-ArithmeticObject subclass: #InfinityDefinition
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Aconcagua-MeasureModel'!
-!classDefinition: 'InfinityDefinition class' category: #'Aconcagua-MeasureModel'!
-InfinityDefinition class
-	instanceVariableNames: 'uniqueInstance'!
-
-!classDefinition: #Measure category: #'Aconcagua-MeasureModel'!
-ArithmeticObject subclass: #Measure
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Aconcagua-MeasureModel'!
-!classDefinition: 'Measure class' category: #'Aconcagua-MeasureModel'!
-Measure class
-	instanceVariableNames: ''!
-
-!classDefinition: #CompoundMeasure category: #'Aconcagua-MeasureModel'!
-Measure subclass: #CompoundMeasure
-	instanceVariableNames: 'measures'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Aconcagua-MeasureModel'!
-!classDefinition: 'CompoundMeasure class' category: #'Aconcagua-MeasureModel'!
-CompoundMeasure class
-	instanceVariableNames: ''!
-
-!classDefinition: #SimpleMeasure category: #'Aconcagua-MeasureModel'!
-Measure subclass: #SimpleMeasure
-	instanceVariableNames: 'amount unit'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Aconcagua-MeasureModel'!
-!classDefinition: 'SimpleMeasure class' category: #'Aconcagua-MeasureModel'!
-SimpleMeasure class
-	instanceVariableNames: ''!
-
-!classDefinition: #MinusInfinityDefinition category: #'Aconcagua-MeasureModel'!
-ArithmeticObject subclass: #MinusInfinityDefinition
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Aconcagua-MeasureModel'!
-!classDefinition: 'MinusInfinityDefinition class' category: #'Aconcagua-MeasureModel'!
-MinusInfinityDefinition class
-	instanceVariableNames: 'uniqueInstance'!
-
-!classDefinition: #IntervalStrategy category: #'Aconcagua-ArithmeticModel'!
-Object subclass: #IntervalStrategy
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Aconcagua-ArithmeticModel'!
-!classDefinition: 'IntervalStrategy class' category: #'Aconcagua-ArithmeticModel'!
-IntervalStrategy class
-	instanceVariableNames: ''!
-
-!classDefinition: #ArithmeticObjectIntervalStrategy category: #'Aconcagua-ArithmeticModel'!
-IntervalStrategy subclass: #ArithmeticObjectIntervalStrategy
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Aconcagua-ArithmeticModel'!
-!classDefinition: 'ArithmeticObjectIntervalStrategy class' category: #'Aconcagua-ArithmeticModel'!
-ArithmeticObjectIntervalStrategy class
-	instanceVariableNames: 'uniqueInstance'!
-
-!classDefinition: #TestIntervalStrategy category: #'Aconcagua-ArithmeticModelTests'!
-IntervalStrategy subclass: #TestIntervalStrategy
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Aconcagua-ArithmeticModelTests'!
-!classDefinition: 'TestIntervalStrategy class' category: #'Aconcagua-ArithmeticModelTests'!
-TestIntervalStrategy class
-	instanceVariableNames: ''!
-
-!classDefinition: #InfinityIntervalStrategy category: #'Aconcagua-MeasureModel'!
-IntervalStrategy subclass: #InfinityIntervalStrategy
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Aconcagua-MeasureModel'!
-!classDefinition: 'InfinityIntervalStrategy class' category: #'Aconcagua-MeasureModel'!
-InfinityIntervalStrategy class
-	instanceVariableNames: 'uniqueInstance'!
-
-!classDefinition: #NumberToArithmeticObjectAdapter category: #'Aconcagua-ArithmeticModel'!
-Object subclass: #NumberToArithmeticObjectAdapter
-	instanceVariableNames: 'number'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Aconcagua-ArithmeticModel'!
-!classDefinition: 'NumberToArithmeticObjectAdapter class' category: #'Aconcagua-ArithmeticModel'!
-NumberToArithmeticObjectAdapter class
-	instanceVariableNames: ''!
-
-!classDefinition: #EdgeInterface category: #'Aconcagua-GraphModel'!
-Object subclass: #EdgeInterface
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Aconcagua-GraphModel'!
-!classDefinition: 'EdgeInterface class' category: #'Aconcagua-GraphModel'!
-EdgeInterface class
-	instanceVariableNames: ''!
-
-!classDefinition: #Edge category: #'Aconcagua-GraphModel'!
-EdgeInterface subclass: #Edge
-	instanceVariableNames: 'source target'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Aconcagua-GraphModel'!
-!classDefinition: 'Edge class' category: #'Aconcagua-GraphModel'!
-Edge class
-	instanceVariableNames: ''!
-
-!classDefinition: #Graph category: #'Aconcagua-GraphModel'!
-Object subclass: #Graph
-	instanceVariableNames: 'edges acyclic nodes'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Aconcagua-GraphModel'!
-!classDefinition: 'Graph class' category: #'Aconcagua-GraphModel'!
-Graph class
-	instanceVariableNames: ''!
-
-!classDefinition: #GraphPathFinder category: #'Aconcagua-GraphModel'!
-Object subclass: #GraphPathFinder
-	instanceVariableNames: 'graph passedByEdges'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Aconcagua-GraphModel'!
-!classDefinition: 'GraphPathFinder class' category: #'Aconcagua-GraphModel'!
-GraphPathFinder class
-	instanceVariableNames: ''!
-
-!classDefinition: #TopologicalSort category: #'Aconcagua-GraphModel'!
-Object subclass: #TopologicalSort
-	instanceVariableNames: 'graph'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Aconcagua-GraphModel'!
-!classDefinition: 'TopologicalSort class' category: #'Aconcagua-GraphModel'!
-TopologicalSort class
-	instanceVariableNames: ''!
-
 !classDefinition: #CircularReadStream category: #'Aconcagua-MeasureModel'!
 Object subclass: #CircularReadStream
 	instanceVariableNames: 'collection position unit firstIndex lastIndex'
@@ -834,6 +644,196 @@ UnitConversionRuleInterface subclass: #UnitConversionRuleToEdgeAdapter
 	category: 'Aconcagua-MeasureModel'!
 !classDefinition: 'UnitConversionRuleToEdgeAdapter class' category: #'Aconcagua-MeasureModel'!
 UnitConversionRuleToEdgeAdapter class
+	instanceVariableNames: ''!
+
+!classDefinition: #ArithmeticObject category: #'Aconcagua-ArithmeticModel'!
+Object subclass: #ArithmeticObject
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Aconcagua-ArithmeticModel'!
+!classDefinition: 'ArithmeticObject class' category: #'Aconcagua-ArithmeticModel'!
+ArithmeticObject class
+	instanceVariableNames: ''!
+
+!classDefinition: #Evaluation category: #'Aconcagua-MeasureModel'!
+ArithmeticObject subclass: #Evaluation
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Aconcagua-MeasureModel'!
+!classDefinition: 'Evaluation class' category: #'Aconcagua-MeasureModel'!
+Evaluation class
+	instanceVariableNames: ''!
+
+!classDefinition: #CachedEvaluation category: #'Aconcagua-MeasureModel'!
+Evaluation subclass: #CachedEvaluation
+	instanceVariableNames: 'cachedValue evaluation'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Aconcagua-MeasureModel'!
+!classDefinition: 'CachedEvaluation class' category: #'Aconcagua-MeasureModel'!
+CachedEvaluation class
+	instanceVariableNames: ''!
+
+!classDefinition: #DummyEvaluation category: #'Aconcagua-MeasureModelTests'!
+Evaluation subclass: #DummyEvaluation
+	instanceVariableNames: 'measure'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Aconcagua-MeasureModelTests'!
+!classDefinition: 'DummyEvaluation class' category: #'Aconcagua-MeasureModelTests'!
+DummyEvaluation class
+	instanceVariableNames: ''!
+
+!classDefinition: #InfinityDefinition category: #'Aconcagua-MeasureModel'!
+ArithmeticObject subclass: #InfinityDefinition
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Aconcagua-MeasureModel'!
+!classDefinition: 'InfinityDefinition class' category: #'Aconcagua-MeasureModel'!
+InfinityDefinition class
+	instanceVariableNames: 'uniqueInstance'!
+
+!classDefinition: #Measure category: #'Aconcagua-MeasureModel'!
+ArithmeticObject subclass: #Measure
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Aconcagua-MeasureModel'!
+!classDefinition: 'Measure class' category: #'Aconcagua-MeasureModel'!
+Measure class
+	instanceVariableNames: ''!
+
+!classDefinition: #CompoundMeasure category: #'Aconcagua-MeasureModel'!
+Measure subclass: #CompoundMeasure
+	instanceVariableNames: 'measures'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Aconcagua-MeasureModel'!
+!classDefinition: 'CompoundMeasure class' category: #'Aconcagua-MeasureModel'!
+CompoundMeasure class
+	instanceVariableNames: ''!
+
+!classDefinition: #SimpleMeasure category: #'Aconcagua-MeasureModel'!
+Measure subclass: #SimpleMeasure
+	instanceVariableNames: 'amount unit'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Aconcagua-MeasureModel'!
+!classDefinition: 'SimpleMeasure class' category: #'Aconcagua-MeasureModel'!
+SimpleMeasure class
+	instanceVariableNames: ''!
+
+!classDefinition: #MinusInfinityDefinition category: #'Aconcagua-MeasureModel'!
+ArithmeticObject subclass: #MinusInfinityDefinition
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Aconcagua-MeasureModel'!
+!classDefinition: 'MinusInfinityDefinition class' category: #'Aconcagua-MeasureModel'!
+MinusInfinityDefinition class
+	instanceVariableNames: 'uniqueInstance'!
+
+!classDefinition: #IntervalStrategy category: #'Aconcagua-ArithmeticModel'!
+Object subclass: #IntervalStrategy
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Aconcagua-ArithmeticModel'!
+!classDefinition: 'IntervalStrategy class' category: #'Aconcagua-ArithmeticModel'!
+IntervalStrategy class
+	instanceVariableNames: ''!
+
+!classDefinition: #InfinityIntervalStrategy category: #'Aconcagua-MeasureModel'!
+IntervalStrategy subclass: #InfinityIntervalStrategy
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Aconcagua-MeasureModel'!
+!classDefinition: 'InfinityIntervalStrategy class' category: #'Aconcagua-MeasureModel'!
+InfinityIntervalStrategy class
+	instanceVariableNames: 'uniqueInstance'!
+
+!classDefinition: #ArithmeticObjectIntervalStrategy category: #'Aconcagua-ArithmeticModel'!
+IntervalStrategy subclass: #ArithmeticObjectIntervalStrategy
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Aconcagua-ArithmeticModel'!
+!classDefinition: 'ArithmeticObjectIntervalStrategy class' category: #'Aconcagua-ArithmeticModel'!
+ArithmeticObjectIntervalStrategy class
+	instanceVariableNames: 'uniqueInstance'!
+
+!classDefinition: #TestIntervalStrategy category: #'Aconcagua-ArithmeticModelTests'!
+IntervalStrategy subclass: #TestIntervalStrategy
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Aconcagua-ArithmeticModelTests'!
+!classDefinition: 'TestIntervalStrategy class' category: #'Aconcagua-ArithmeticModelTests'!
+TestIntervalStrategy class
+	instanceVariableNames: ''!
+
+!classDefinition: #NumberToArithmeticObjectAdapter category: #'Aconcagua-ArithmeticModel'!
+Object subclass: #NumberToArithmeticObjectAdapter
+	instanceVariableNames: 'number'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Aconcagua-ArithmeticModel'!
+!classDefinition: 'NumberToArithmeticObjectAdapter class' category: #'Aconcagua-ArithmeticModel'!
+NumberToArithmeticObjectAdapter class
+	instanceVariableNames: ''!
+
+!classDefinition: #EdgeInterface category: #'Aconcagua-GraphModel'!
+Object subclass: #EdgeInterface
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Aconcagua-GraphModel'!
+!classDefinition: 'EdgeInterface class' category: #'Aconcagua-GraphModel'!
+EdgeInterface class
+	instanceVariableNames: ''!
+
+!classDefinition: #Edge category: #'Aconcagua-GraphModel'!
+EdgeInterface subclass: #Edge
+	instanceVariableNames: 'source target'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Aconcagua-GraphModel'!
+!classDefinition: 'Edge class' category: #'Aconcagua-GraphModel'!
+Edge class
+	instanceVariableNames: ''!
+
+!classDefinition: #Graph category: #'Aconcagua-GraphModel'!
+Object subclass: #Graph
+	instanceVariableNames: 'edges acyclic nodes'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Aconcagua-GraphModel'!
+!classDefinition: 'Graph class' category: #'Aconcagua-GraphModel'!
+Graph class
+	instanceVariableNames: ''!
+
+!classDefinition: #GraphPathFinder category: #'Aconcagua-GraphModel'!
+Object subclass: #GraphPathFinder
+	instanceVariableNames: 'graph passedByEdges'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Aconcagua-GraphModel'!
+!classDefinition: 'GraphPathFinder class' category: #'Aconcagua-GraphModel'!
+GraphPathFinder class
+	instanceVariableNames: ''!
+
+!classDefinition: #TopologicalSort category: #'Aconcagua-GraphModel'!
+Object subclass: #TopologicalSort
+	instanceVariableNames: 'graph'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Aconcagua-GraphModel'!
+!classDefinition: 'TopologicalSort class' category: #'Aconcagua-GraphModel'!
+TopologicalSort class
 	instanceVariableNames: ''!
 
 
@@ -1504,6 +1504,91 @@ from: start to: stop by: step intervalStrategy: anIntervalStrategy
 	^self new initializeFrom: start to: stop by: step intervalStrategy: anIntervalStrategy
 ! !
 
+!IndeterminateOperationException methodsFor: 'accessing' stamp: 'HAW 3/25/2017 12:06:53'!
+description
+
+	^'The {1} operation is indeterminate between {2} and {3}' format: { operation .leftOperand .rightOperand }! !
+
+!IndeterminateOperationException methodsFor: 'initialization'!
+initializeOperation: anOperation leftOperand: aLeftOperand rightOperand: aRightOperand
+
+	operation := anOperation.
+	leftOperand := aLeftOperand.
+	rightOperand := aRightOperand! !
+
+!IndeterminateOperationException class methodsFor: 'instance creation'!
+operation: anOperation leftOperand: aLeftOperand rightOperand: aRightOperand
+
+	^self new initializeOperation: anOperation leftOperand: aLeftOperand rightOperand: aRightOperand! !
+
+!IndeterminateOperationException class methodsFor: 'signaling'!
+signalOperation: anOperation leftOperand: aLeftOperand rightOperand: aRightOperand
+
+	(self operation: anOperation leftOperand: aLeftOperand rightOperand: aRightOperand) signal! !
+
+!InvalidProportionalUnitConversionFunctionException methodsFor: 'accessing' stamp: 'HAW 3/25/2017 13:01:43'!
+description
+
+	^'The proportional relation between {1} and {2} it is not valid because {1} represents nothing or they are not of the same domain' format: { sourceMeasure .equivalentMeasure }! !
+
+!InvalidProportionalUnitConversionFunctionException methodsFor: 'accessing'!
+equivalentMeasure
+
+	^equivalentMeasure! !
+
+!InvalidProportionalUnitConversionFunctionException methodsFor: 'initialization'!
+initializeSourceMeasure: aSourceMeasure equivalentMeasure: aEquivalentMeasure
+
+	sourceMeasure := aSourceMeasure.
+	equivalentMeasure := aEquivalentMeasure! !
+
+!InvalidProportionalUnitConversionFunctionException methodsFor: 'accessing'!
+sourceMeasure
+
+	^sourceMeasure! !
+
+!InvalidProportionalUnitConversionFunctionException class methodsFor: 'signaling'!
+signalSourceMeasure: aSourceMeasure equivalentMeasure: aEquivalentMeasure
+
+	(self sourceMeasure: aSourceMeasure equivalentMeasure: aEquivalentMeasure) signal! !
+
+!InvalidProportionalUnitConversionFunctionException class methodsFor: 'instance creation'!
+sourceMeasure: aSourceMeasure equivalentMeasure: aEquivalentMeasure
+
+	^self new initializeSourceMeasure: aSourceMeasure equivalentMeasure: aEquivalentMeasure! !
+
+!NoUnitConversionRuleException methodsFor: 'accessing' stamp: 'HAW 3/25/2017 12:06:20'!
+description
+
+	^'Does not exist a conversion rule from {1} to {2}' format: { sourceUnit .targetUnit }! !
+
+!NoUnitConversionRuleException methodsFor: 'initialization'!
+initializeWith: aSourceUnit targetUnit: aTargetUnit
+
+	sourceUnit := aSourceUnit.
+	targetUnit := aTargetUnit! !
+
+!NoUnitConversionRuleException methodsFor: 'accessing'!
+sourceUnit 
+
+	^sourceUnit
+! !
+
+!NoUnitConversionRuleException methodsFor: 'accessing'!
+targetUnit 
+
+	^targetUnit! !
+
+!NoUnitConversionRuleException class methodsFor: 'signaling'!
+signalWithSourceUnit: aSourceUnit targetUnit: aTargetUnit
+
+	(self sourceUnit: aSourceUnit targetUnit: aTargetUnit) signal! !
+
+!NoUnitConversionRuleException class methodsFor: 'instance creation'!
+sourceUnit: aSourceUnit targetUnit: aTargetUnit
+
+	^self new initializeWith: aSourceUnit targetUnit: aTargetUnit! !
+
 !IndexOutOfRangeException methodsFor: 'accessing'!
 collection
 
@@ -1581,6 +1666,47 @@ operationName
 
 	self subclassResponsibility! !
 
+!CanNotConvertMeasureException methodsFor: 'accessing' stamp: 'HAW 3/25/2017 12:59:16'!
+description
+
+	^'It is not possible to convert {1} to {2}' format: { sourceMeasure .targetUnit }! !
+
+!CanNotConvertMeasureException methodsFor: 'initialization'!
+initializeWith: aSourceMeasure targetUnit: aTargetUnit 
+
+	sourceMeasure := aSourceMeasure.
+	targetUnit := aTargetUnit! !
+
+!CanNotConvertMeasureException methodsFor: 'priv handling'!
+isResumable
+
+	^true! !
+
+!CanNotConvertMeasureException methodsFor: 'accessing'!
+operationName
+
+	^'convertTo:'! !
+
+!CanNotConvertMeasureException methodsFor: 'accessing'!
+sourceMeasure
+
+	^sourceMeasure! !
+
+!CanNotConvertMeasureException methodsFor: 'accessing'!
+targetUnit
+
+	^targetUnit! !
+
+!CanNotConvertMeasureException class methodsFor: 'signaling'!
+signalSourceMeasure: aSourceMeasure targetUnit: aTargetUnit
+
+	^(self sourceMeasure: aSourceMeasure targetUnit: aTargetUnit) signal! !
+
+!CanNotConvertMeasureException class methodsFor: 'instance creation'!
+sourceMeasure: aSourceMeasure targetUnit: aTargetUnit
+
+	^self new initializeWith: aSourceMeasure targetUnit: aTargetUnit! !
+
 !InvalidBinaryOperationException methodsFor: 'accessing' stamp: 'HAW 3/25/2017 12:58:35'!
 description
 
@@ -1648,47 +1774,6 @@ operationName: anOperationName operand: anOperand
 signalOperationName: anOperationName operand: anOperand
 
 	(self operationName: anOperationName operand: anOperand) signal! !
-
-!CanNotConvertMeasureException methodsFor: 'accessing' stamp: 'HAW 3/25/2017 12:59:16'!
-description
-
-	^'It is not possible to convert {1} to {2}' format: { sourceMeasure .targetUnit }! !
-
-!CanNotConvertMeasureException methodsFor: 'initialization'!
-initializeWith: aSourceMeasure targetUnit: aTargetUnit 
-
-	sourceMeasure := aSourceMeasure.
-	targetUnit := aTargetUnit! !
-
-!CanNotConvertMeasureException methodsFor: 'priv handling'!
-isResumable
-
-	^true! !
-
-!CanNotConvertMeasureException methodsFor: 'accessing'!
-operationName
-
-	^'convertTo:'! !
-
-!CanNotConvertMeasureException methodsFor: 'accessing'!
-sourceMeasure
-
-	^sourceMeasure! !
-
-!CanNotConvertMeasureException methodsFor: 'accessing'!
-targetUnit
-
-	^targetUnit! !
-
-!CanNotConvertMeasureException class methodsFor: 'signaling'!
-signalSourceMeasure: aSourceMeasure targetUnit: aTargetUnit
-
-	^(self sourceMeasure: aSourceMeasure targetUnit: aTargetUnit) signal! !
-
-!CanNotConvertMeasureException class methodsFor: 'instance creation'!
-sourceMeasure: aSourceMeasure targetUnit: aTargetUnit
-
-	^self new initializeWith: aSourceMeasure targetUnit: aTargetUnit! !
 
 !UndefinedArithmeticObjectValueException methodsFor: 'accessing'!
 arithmeticObject
@@ -1838,91 +1923,6 @@ node: aNode graph: aGraph
 signalNode: aNode graph: aGraph
 
 	(self node: aNode graph: aGraph) signal! !
-
-!IndeterminateOperationException methodsFor: 'accessing' stamp: 'HAW 3/25/2017 12:06:53'!
-description
-
-	^'The {1} operation is indeterminate between {2} and {3}' format: { operation .leftOperand .rightOperand }! !
-
-!IndeterminateOperationException methodsFor: 'initialization'!
-initializeOperation: anOperation leftOperand: aLeftOperand rightOperand: aRightOperand
-
-	operation := anOperation.
-	leftOperand := aLeftOperand.
-	rightOperand := aRightOperand! !
-
-!IndeterminateOperationException class methodsFor: 'instance creation'!
-operation: anOperation leftOperand: aLeftOperand rightOperand: aRightOperand
-
-	^self new initializeOperation: anOperation leftOperand: aLeftOperand rightOperand: aRightOperand! !
-
-!IndeterminateOperationException class methodsFor: 'signaling'!
-signalOperation: anOperation leftOperand: aLeftOperand rightOperand: aRightOperand
-
-	(self operation: anOperation leftOperand: aLeftOperand rightOperand: aRightOperand) signal! !
-
-!InvalidProportionalUnitConversionFunctionException methodsFor: 'accessing' stamp: 'HAW 3/25/2017 13:01:43'!
-description
-
-	^'The proportional relation between {1} and {2} it is not valid because {1} represents nothing or they are not of the same domain' format: { sourceMeasure .equivalentMeasure }! !
-
-!InvalidProportionalUnitConversionFunctionException methodsFor: 'accessing'!
-equivalentMeasure
-
-	^equivalentMeasure! !
-
-!InvalidProportionalUnitConversionFunctionException methodsFor: 'initialization'!
-initializeSourceMeasure: aSourceMeasure equivalentMeasure: aEquivalentMeasure
-
-	sourceMeasure := aSourceMeasure.
-	equivalentMeasure := aEquivalentMeasure! !
-
-!InvalidProportionalUnitConversionFunctionException methodsFor: 'accessing'!
-sourceMeasure
-
-	^sourceMeasure! !
-
-!InvalidProportionalUnitConversionFunctionException class methodsFor: 'signaling'!
-signalSourceMeasure: aSourceMeasure equivalentMeasure: aEquivalentMeasure
-
-	(self sourceMeasure: aSourceMeasure equivalentMeasure: aEquivalentMeasure) signal! !
-
-!InvalidProportionalUnitConversionFunctionException class methodsFor: 'instance creation'!
-sourceMeasure: aSourceMeasure equivalentMeasure: aEquivalentMeasure
-
-	^self new initializeSourceMeasure: aSourceMeasure equivalentMeasure: aEquivalentMeasure! !
-
-!NoUnitConversionRuleException methodsFor: 'accessing' stamp: 'HAW 3/25/2017 12:06:20'!
-description
-
-	^'Does not exist a conversion rule from {1} to {2}' format: { sourceUnit .targetUnit }! !
-
-!NoUnitConversionRuleException methodsFor: 'initialization'!
-initializeWith: aSourceUnit targetUnit: aTargetUnit
-
-	sourceUnit := aSourceUnit.
-	targetUnit := aTargetUnit! !
-
-!NoUnitConversionRuleException methodsFor: 'accessing'!
-sourceUnit 
-
-	^sourceUnit
-! !
-
-!NoUnitConversionRuleException methodsFor: 'accessing'!
-targetUnit 
-
-	^targetUnit! !
-
-!NoUnitConversionRuleException class methodsFor: 'signaling'!
-signalWithSourceUnit: aSourceUnit targetUnit: aTargetUnit
-
-	(self sourceUnit: aSourceUnit targetUnit: aTargetUnit) signal! !
-
-!NoUnitConversionRuleException class methodsFor: 'instance creation'!
-sourceUnit: aSourceUnit targetUnit: aTargetUnit
-
-	^self new initializeWith: aSourceUnit targetUnit: aTargetUnit! !
 
 !ArithmeticObjectIntervalStrategyTest methodsFor: 'test'!
 testSingleton
@@ -9896,6 +9896,12 @@ hectometerName
 
 	^'hectometer'! !
 
+!UnitsTestResource methodsFor: 'initialization' stamp: 'HAW 8/22/2017 11:55:45'!
+installUnitsAsGlobals
+
+	units do: [:aUnit |
+		(aUnit ~= self second and: [ aUnit ~= self minute ]) ifTrue: [ Smalltalk at: aUnit name asSymbol put: aUnit ]].! !
+
 !UnitsTestResource methodsFor: 'temperature units - accessing'!
 kelvin
 
@@ -10000,6 +10006,1700 @@ setUp
 		addUnit: self createSecond;
 		addUnit: self createMinute.
 ! !
+
+!UnitsTestResource class methodsFor: 'initialization' stamp: 'HAW 8/22/2017 11:56:17'!
+installUnitsAsGlobals
+
+	^self new 
+		setUp;
+		installUnitsAsGlobals.
+	! !
+
+!CircularReadStream methodsFor: 'enumerating - private' stamp: 'mx 11/1/2007 20:33'!
+advancePositions: aMeasure
+
+	| amount |
+	
+	amount := (aMeasure convertTo: unit) floor amount.
+	position := ((position - 1 + amount) \\ collection size) + 1! !
+
+!CircularReadStream methodsFor: 'testing' stamp: 'mx 11/21/2007 15:23'!
+atBegin
+
+	^position = 1! !
+
+!CircularReadStream methodsFor: 'testing' stamp: 'mx 11/21/2007 15:23'!
+atEnd
+
+	^position = collection size! !
+
+!CircularReadStream methodsFor: 'accessing' stamp: 'mx 11/21/2007 09:07'!
+current
+
+	^collection at: position! !
+
+!CircularReadStream methodsFor: 'querying' stamp: 'mx 11/1/2007 20:27'!
+distanceFrom: anObject
+
+	^self distanceFrom: anObject toObjectPosition: position! !
+
+!CircularReadStream methodsFor: 'querying' stamp: 'mx 11/1/2007 20:28'!
+distanceFrom: anObject to: anotherObject
+
+	^self distanceFrom: anObject toObjectPosition: (collection indexOf: anotherObject)! !
+
+!CircularReadStream methodsFor: 'querying' stamp: 'mx 11/1/2007 20:26'!
+distanceFrom: anObject toObjectPosition: aToObjectPosition
+
+	| fromObjectPosition steps |
+
+	fromObjectPosition := collection indexOf: anObject.
+	steps := aToObjectPosition >= fromObjectPosition 
+		ifTrue: [aToObjectPosition - fromObjectPosition]
+		ifFalse: [collection size - fromObjectPosition + aToObjectPosition].
+	^unit with: steps! !
+
+!CircularReadStream methodsFor: 'querying' stamp: 'mx 11/21/2007 09:09'!
+distanceTo: anObject
+
+	^self distanceTo: anObject from: self current! !
+
+!CircularReadStream methodsFor: 'querying' stamp: 'mx 10/1/2007 21:03'!
+distanceTo: anObject from: anotherObject
+
+	^self distanceFrom: anotherObject to: anObject! !
+
+!CircularReadStream methodsFor: 'accessing' stamp: 'mx 2/21/2008 21:40'!
+first
+
+	^collection first! !
+
+!CircularReadStream methodsFor: 'conditional protocol' stamp: 'mx 11/17/2007 13:50'!
+ifAtBeginDo: aBlock else: anotherBlock
+
+	^self atBegin
+		ifTrue: aBlock
+		ifFalse: anotherBlock! !
+
+!CircularReadStream methodsFor: 'conditional protocol' stamp: 'mx 11/17/2007 13:49'!
+ifAtEndDo: aBlock else: anotherBlock
+
+	^self atEnd
+		ifTrue: aBlock
+		ifFalse: anotherBlock! !
+
+!CircularReadStream methodsFor: 'initialization' stamp: 'mx 11/21/2007 15:22'!
+initializeOn: aCollection moving: aUnit startingCircleAtIndex: anIndex
+
+	collection := (aCollection copyFrom: anIndex to: aCollection size), (aCollection copyFrom: 1 to: anIndex - 1).
+	unit := aUnit.
+	self upToBegin! !
+
+!CircularReadStream methodsFor: 'collection protocol' stamp: 'mx 11/17/2007 15:59'!
+inject: aMeasure into: aBlock
+
+	^collection inject: aMeasure into: aBlock! !
+
+!CircularReadStream methodsFor: 'testing' stamp: 'mx 11/21/2007 16:12'!
+isPrevious: anObject to: anotherObject
+
+	^(collection indexOf: anObject) < (collection indexOf: anotherObject)! !
+
+!CircularReadStream methodsFor: 'accessing' stamp: 'mx 2/21/2008 20:50'!
+last
+
+	^collection last! !
+
+!CircularReadStream methodsFor: 'enumerating' stamp: 'mx 9/30/2007 17:52'!
+next
+
+	^self next: (unit with: 1)! !
+
+!CircularReadStream methodsFor: 'enumerating' stamp: 'mx 11/21/2007 09:08'!
+next: aMeasure
+
+	self advancePositions: aMeasure.
+	^self current! !
+
+!CircularReadStream methodsFor: 'enumerating' stamp: 'mx 9/30/2007 17:52'!
+previous
+
+	^self previous: (unit with: 1)! !
+
+!CircularReadStream methodsFor: 'enumerating' stamp: 'mx 11/1/2007 20:32'!
+previous: aMeasure
+
+	^self next: aMeasure negated! !
+
+!CircularReadStream methodsFor: 'querying' stamp: 'mx 11/21/2007 15:24'!
+relativeDistanceFrom: anObject to: anotherObject
+
+	^(collection indexOf: anObject) > (collection indexOf: anotherObject)
+		ifTrue: [(self distanceFrom: anotherObject to: anObject) negated]
+		ifFalse: [self distanceFrom: anObject to: anotherObject]
+! !
+
+!CircularReadStream methodsFor: 'positioning' stamp: 'mx 10/6/2007 15:56'!
+upTo: anObject
+
+	position := collection indexOf: anObject! !
+
+!CircularReadStream methodsFor: 'positioning' stamp: 'mx 11/21/2007 15:24'!
+upToBegin
+
+	position := 1! !
+
+!CircularReadStream methodsFor: 'positioning' stamp: 'mx 11/21/2007 15:24'!
+upToEnd
+
+	position := collection size! !
+
+!CircularReadStream class methodsFor: 'instance creation' stamp: 'mx 11/21/2007 10:28'!
+on: aCollection moving: aUnit
+
+	^self on: aCollection moving: aUnit startingCircleAtIndex: 1! !
+
+!CircularReadStream class methodsFor: 'instance creation' stamp: 'mx 11/21/2007 10:29'!
+on: aCollection moving: aUnit startingCircleAt: anObject
+
+	^self on: aCollection moving: aUnit startingCircleAtIndex: (aCollection indexOf: anObject)! !
+
+!CircularReadStream class methodsFor: 'instance creation' stamp: 'mx 11/21/2007 10:29'!
+on: aCollection moving: aUnit startingCircleAtIndex: anIndex
+
+	^self new initializeOn: aCollection moving: aUnit startingCircleAtIndex: anIndex! !
+
+!ConversionTable methodsFor: 'table setup'!
+addUnitConversionRule: aUnitConvertionRule
+
+	self 
+		removeUnitConversionRuleFrom: aUnitConvertionRule sourceUnit
+		to: aUnitConvertionRule targetUnit
+		ifAbsent: [].
+	unitConversionRules add: aUnitConvertionRule.
+	self invalidateGraph! !
+
+!ConversionTable methodsFor: 'graph management'!
+createGraph 
+
+	graph := Graph edges: self createGraphEdges
+	
+		! !
+
+!ConversionTable methodsFor: 'graph management'!
+createGraphEdges
+
+	| edges |
+	
+	edges := unitConversionRules collect: [ :aConvertionRule | self createUnitConversionRuleToEdgeAdapterFor: aConvertionRule ].
+	^edges
+	
+		! !
+
+!ConversionTable methodsFor: 'table setup - private'!
+createProportionalUnitConversionFunctionWithSource: sourceMeasure andTarget: targetMeasure
+
+	^ProportionalUnitConversionFunction measure: sourceMeasure isProportionalTo: targetMeasure! !
+
+!ConversionTable methodsFor: 'table setup - private'!
+createUnitConversionRuleFrom: aSourceUnit to: aTargetUnit using: anEvaluation
+
+	^UnitConversionRule 
+		from: aSourceUnit baseUnit
+		to: aTargetUnit baseUnit
+		use: anEvaluation! !
+
+!ConversionTable methodsFor: 'graph management'!
+createUnitConversionRuleToEdgeAdapterFor: aUnitConvertionRule
+
+	^UnitConversionRuleToEdgeAdapter for: aUnitConvertionRule! !
+
+!ConversionTable methodsFor: 'table setup'!
+from: aSourceUnit to: aTargetUnit use: aUnitConvertionFunction
+
+	| unitConvertionRule |
+	unitConvertionRule := self createUnitConversionRuleFrom: aSourceUnit to: aTargetUnit using: aUnitConvertionFunction. 
+	self addUnitConversionRule: unitConvertionRule.
+! !
+
+!ConversionTable methodsFor: 'graph management'!
+graph
+
+	graph isNil ifTrue: [ self createGraph ].
+	^graph! !
+
+!ConversionTable methodsFor: 'initialization'!
+initialize
+
+	unitConversionRules := OrderedCollection new.
+	self invalidateGraph! !
+
+!ConversionTable methodsFor: 'graph management'!
+invalidateGraph
+
+	graph := nil! !
+
+!ConversionTable methodsFor: 'table setup'!
+measure: aSourceMeasure convertsTo: aTargetMeasure
+
+	| unitConvertionFunction |
+	unitConvertionFunction := self 
+		createProportionalUnitConversionFunctionWithSource: aSourceMeasure
+		andTarget: aTargetMeasure.
+	self 
+		from: aSourceMeasure unit
+		to: aTargetMeasure unit
+		use: unitConvertionFunction! !
+
+!ConversionTable methodsFor: 'table setup'!
+measure: aSourceMeasure isEquivalentTo: aTargetMeasure
+
+	self measure: aSourceMeasure convertsTo: aTargetMeasure.
+	self measure: aTargetMeasure convertsTo: aSourceMeasure! !
+
+!ConversionTable methodsFor: 'table setup'!
+removeUnitConversionRuleFrom: aSourceUnit to: aTargetUnit
+
+	^self 
+		removeUnitConversionRuleFrom: aSourceUnit
+		to: aTargetUnit
+		ifAbsent: [self signalNoUnitConversionRuleFrom: aSourceUnit to: aTargetUnit]! !
+
+!ConversionTable methodsFor: 'table setup'!
+removeUnitConversionRuleFrom: aSourceUnit to: aTargetUnit ifAbsent: aBlock
+
+	| currentConvertionRule |
+	currentConvertionRule := self 
+		unitConversionRuleFrom: aSourceUnit
+		to: aTargetUnit
+		ifNone: [^aBlock value].
+	unitConversionRules remove: currentConvertionRule.
+	self invalidateGraph! !
+
+!ConversionTable methodsFor: 'exceptions'!
+signalNoUnitConversionRuleFrom: aSourceUnit to: aTargetUnit
+
+	NoUnitConversionRuleException signalWithSourceUnit: aSourceUnit targetUnit: aTargetUnit! !
+
+!ConversionTable methodsFor: 'accessing'!
+unitConversionRuleFrom: aSourceUnit to: aTargetUnit
+
+	^self 
+		unitConversionRuleFrom: aSourceUnit
+		to: aTargetUnit
+		ifNone: [self signalNoUnitConversionRuleFrom: aSourceUnit to: aTargetUnit]! !
+
+!ConversionTable methodsFor: 'accessing'!
+unitConversionRuleFrom: aSourceUnit to: aTargetUnit ifNone: aBlock
+
+	^unitConversionRules 
+		detect: [:aUnitConvertionRule | aUnitConvertionRule convertsFrom: aSourceUnit to: aTargetUnit]
+		ifNone: aBlock! !
+
+!ConversionTable methodsFor: 'accessing'!
+unitConversionRules
+
+	^unitConversionRules copy! !
+
+!ConversionTable class methodsFor: 'instance creation'!
+new
+
+	^super new initialize! !
+
+!MeasureConverter methodsFor: 'testing'!
+canConvert: aSourceMeasure to: aTargetUnit
+
+	[self findPathAndConvert: aSourceMeasure to: aTargetUnit]
+		on: GraphPathNotFoundException
+		do: [:ex | ^ex return: false].
+	^true! !
+
+!MeasureConverter methodsFor: 'converting'!
+convert: aSourceMeasure to: aTargetUnit
+
+	^[aSourceMeasure convertTo: aTargetUnit using: self]
+		on: GraphPathNotFoundException
+		do: [:aSignal |
+			CanNotConvertMeasureException
+				signalSourceMeasure: aSourceMeasure
+				targetUnit: aTargetUnit]! !
+
+!MeasureConverter methodsFor: 'converting - private'!
+convert: aSourceMeasure to: aTargetUnit using: aPath 
+
+	| convertedMeasure |
+	
+	convertedMeasure := aPath edges
+		inject: aSourceMeasure 
+		into: [ :aMeasure :aUnitConvertionRule | aUnitConvertionRule value: aMeasure ].
+
+	^convertedMeasure! !
+
+!MeasureConverter methodsFor: 'converting - private' stamp: 'HAW 3/25/2017 20:17:09'!
+convertCompoundMeasure: aSourceCompoundMeasure to: aTargetUnit
+
+	| targetMeasure |
+	targetMeasure := aSourceCompoundMeasure measures 
+				inject: 0
+				into: 
+					[:convertedMeasure :measureToConvert | 
+					convertedMeasure 
+						+ (self convert: measureToConvert to: aTargetUnit)].
+	^targetMeasure! !
+
+!MeasureConverter methodsFor: 'converting - private'!
+convertMeasure: aSourceMeasure to: aTargetUnit
+
+	| targetMeasure |
+	targetMeasure := (aSourceMeasure unit sameDomainAs: aTargetUnit) 
+		ifTrue: [aSourceMeasure convertTo: aTargetUnit]
+		ifFalse: [self findPathAndConvert: aSourceMeasure to: aTargetUnit].
+	^targetMeasure! !
+
+!MeasureConverter methodsFor: 'converting - private'!
+findPathAndConvert: aSourceMeasure to: aTargetUnit 
+
+	| convertionPath |
+
+	convertionPath := self pathFrom: aSourceMeasure unit to: aTargetUnit.
+	^self 
+		convert: aSourceMeasure
+		to: aTargetUnit
+		using: convertionPath! !
+
+!MeasureConverter methodsFor: 'accessing'!
+graphPathFinder
+	
+	^graphPathFinder! !
+
+!MeasureConverter methodsFor: 'initialization'!
+initializeWith: aGraphPathFinder 
+
+	graphPathFinder := aGraphPathFinder! !
+
+!MeasureConverter methodsFor: 'converting - private'!
+pathFrom: aSourceUnit to: aTargetUnit
+
+	| path |
+	
+	path := self graphPathFinder pathFrom: aSourceUnit to: aTargetUnit.
+	
+	^path.
+	
+	! !
+
+!MeasureConverter class methodsFor: 'instance creation'!
+defaultGraphPathFinder
+
+	^GraphPathFinder! !
+
+!MeasureConverter class methodsFor: 'instance creation'!
+on: aConvertionTable 
+
+	^self with: (self defaultGraphPathFinder on: (aConvertionTable graph))! !
+
+!MeasureConverter class methodsFor: 'instance creation'!
+with: aGraphPathFinder
+
+	^self new initializeWith: aGraphPathFinder! !
+
+!Unit methodsFor: 'mathematic operations'!
+* aNumberOrUnit
+
+	^aNumberOrUnit multiplyByUnit: self! !
+
+!Unit methodsFor: 'mathematic operations'!
+/ aNumberOrUnit
+
+	^aNumberOrUnit divideByUnit: self! !
+
+!Unit methodsFor: 'converting' stamp: 'SeanTAllen 11/28/2009 12:25'!
+adaptToNumber: aNumber andSend: aSelector 
+	^ (NumberToArithmeticObjectAdapter number: aNumber) 
+		perform: aSelector
+		with: self! !
+
+!Unit methodsFor: 'accessing'!
+baseUnit
+
+	^self subclassResponsibility! !
+
+!Unit methodsFor: 'converting'!
+convertAmountToBaseUnit: aNumber
+
+	self subclassResponsibility! !
+
+!Unit methodsFor: 'converting - private'!
+convertToBaseUnit: aMeasure 
+	
+	self subclassResponsibility! !
+
+!Unit methodsFor: 'accessing'!
+denominator
+
+	^NullUnit new! !
+
+!Unit methodsFor: 'accessing'!
+denominatorOf: aNumber
+
+	^self denominator with: aNumber denominator
+	
+! !
+
+!Unit methodsFor: 'mathematic operations'!
+divideByUnit: aNumberOrUnit
+
+	self subclassResponsibility! !
+
+!Unit methodsFor: 'mathematic operations - private'!
+divideDividedUnit: aDividedUnit
+
+	self subclassResponsibility! !
+
+!Unit methodsFor: 'mathematic operations - private'!
+divideInfinity: anInfinity
+
+	^((NullUnit new / self) * anInfinity unit) with: anInfinity amount! !
+
+!Unit methodsFor: 'mathematic operations - private'!
+divideMinusInfinity: aMinusInfinity
+
+	^((NullUnit new / self) * aMinusInfinity unit) with: aMinusInfinity amount! !
+
+!Unit methodsFor: 'mathematic operations - private'!
+divideMultipliedUnit: aMultipliedUnit
+
+	self subclassResponsibility! !
+
+!Unit methodsFor: 'mathematic operations - private'!
+divideNullUnit: aNullUnit 
+
+	self subclassResponsibility! !
+
+!Unit methodsFor: 'mathematic operations - private' stamp: 'HAW 3/25/2017 19:36:30'!
+divideSimpleMeasure: aMeasure
+
+	^((NullUnit new / self) * aMeasure unit) with: aMeasure amount! !
+
+!Unit methodsFor: 'mathematic operations - private'!
+divideSimpleUnit: aUnit
+
+	self subclassResponsibility! !
+
+!Unit methodsFor: 'accessing'!
+doNotImplementHash 
+	
+	"Do not implement hash because its behavior is the same as object
+	See representSameEntityAs:"! !
+
+!Unit methodsFor: 'testing' stamp: 'HernanWilkinson 6/2/2014 11:04'!
+isNamed: aName
+ 
+	^ self name sameAs: aName! !
+
+!Unit methodsFor: 'testing' stamp: 'HAW 3/25/2017 18:54:11'!
+isNamedAs: aUnit 
+
+	^ aUnit isNamed: self name! !
+
+!Unit methodsFor: 'testing'!
+isZero
+
+	^self isNothing! !
+
+!Unit methodsFor: 'mathematic operations'!
+multiplyByUnit: aNumberOrUnit
+
+	self subclassResponsibility! !
+
+!Unit methodsFor: 'mathematic operations - private'!
+multiplyDividedUnit: aDividedUnit
+
+	self subclassResponsibility! !
+
+!Unit methodsFor: 'mathematic operations - private'!
+multiplyInfinity: anInfinity
+
+	^(anInfinity unit * self) with: anInfinity amount! !
+
+!Unit methodsFor: 'mathematic operations - private'!
+multiplyMinusInfinity: aMinusInfinity
+
+	^(aMinusInfinity unit * self) with: aMinusInfinity amount! !
+
+!Unit methodsFor: 'mathematic operations - private'!
+multiplyMultipliedUnit: aMultipliedUnit
+
+	self subclassResponsibility! !
+
+!Unit methodsFor: 'mathematic operations - private' stamp: 'HAW 3/25/2017 19:43:17'!
+multiplySimpleMeasure: aMeasure
+
+	^(aMeasure unit * self) with: aMeasure amount! !
+
+!Unit methodsFor: 'mathematic operations - private'!
+multiplySimpleUnit: aUnit
+
+	self subclassResponsibility! !
+
+!Unit methodsFor: 'accessing'!
+name
+
+	^self nameForOne! !
+
+!Unit methodsFor: 'accessing'!
+nameFor: aNumber
+	"It returns the name that must be used to identify an amount <aNumber> of receiver"
+
+	^aNumber unitNameOf: self! !
+
+!Unit methodsFor: 'accessing'!
+nameForMany
+
+	self subclassResponsibility! !
+
+!Unit methodsFor: 'accessing'!
+nameForOne
+
+	self subclassResponsibility! !
+
+!Unit methodsFor: 'accessing'!
+nameForUndefinedAmount
+
+	^self nameForMany! !
+
+!Unit methodsFor: 'accessing'!
+nothingAmount
+
+	self subclassResponsibility! !
+
+!Unit methodsFor: 'accessing' stamp: 'HAW 3/25/2017 19:11:51'!
+nullMeasure
+
+	^SimpleMeasure amount: self baseUnit nothingAmount unit: self baseUnit! !
+
+!Unit methodsFor: 'accessing'!
+numerator
+
+	^self! !
+
+!Unit methodsFor: 'accessing'!
+numeratorOf: aNumber
+
+	^self numerator with: aNumber numerator! !
+
+!Unit methodsFor: 'printing'!
+printOn: aStream
+
+	aStream nextPutAll: self name asString! !
+
+!Unit methodsFor: 'accessing'!
+reciprocal
+
+	^self denominator / self numerator! !
+
+!Unit methodsFor: 'testing'!
+sameDomainAs: aUnit
+
+	^self baseUnit=aUnit baseUnit
+! !
+
+!Unit methodsFor: 'accessing'!
+sign
+
+	self subclassResponsibility! !
+
+!Unit methodsFor: 'measurement creation'!
+with: aNumber
+
+	self subclassResponsibility! !
+
+!Unit class methodsFor: 'accessing'!
+defaultSign
+
+	^'NO SIGN'
+! !
+
+!Unit class methodsFor: 'accessing'!
+nameForManyEndString
+
+	^'s'
+
+! !
+
+!Unit class methodsFor: 'accessing'!
+nameForManyFrom: aString
+
+	^aString , self nameForManyEndString.
+
+! !
+
+!CompoundUnit methodsFor: 'accessing'!
+baseUnit
+
+	^self! !
+
+!CompoundUnit methodsFor: 'converting'!
+convertAmountToBaseUnit: aNumber
+
+	^aNumber! !
+
+!CompoundUnit methodsFor: 'converting - private'!
+convertFromBaseUnit: aMeasure 
+
+	^aMeasure! !
+
+!CompoundUnit methodsFor: 'converting - private'!
+convertToBaseUnit: aMeasure 
+
+	^aMeasure! !
+
+!CompoundUnit methodsFor: 'accessing'!
+hash
+
+	self subclassResponsibility! !
+
+!CompoundUnit methodsFor: 'accessing'!
+nothingAmount
+
+	^0! !
+
+!CompoundUnit methodsFor: 'measurement creation' stamp: 'HAW 3/25/2017 19:11:51'!
+with: aNumber
+
+	^SimpleMeasure amount: aNumber unit: self! !
+
+!DividedUnit methodsFor: 'comparing'!
+= anObject
+
+	^self class = anObject class 
+		and: [ numerator = anObject numerator 
+		and: [ denominator = anObject denominator ]]! !
+
+!DividedUnit methodsFor: 'accessing'!
+denominator
+
+	^denominator! !
+
+!DividedUnit methodsFor: 'mathematic operations'!
+divFrom: aNumber
+
+	^aNumber * self reciprocal! !
+
+!DividedUnit methodsFor: 'mathematic operations'!
+divideByUnit: aUnit
+
+	^aUnit divideDividedUnit: self! !
+
+!DividedUnit methodsFor: 'mathematic operations - private'!
+divideDividedUnit: aDividedUnit
+
+	^self class dividedUnit: self dividedUnit: aDividedUnit! !
+
+!DividedUnit methodsFor: 'mathematic operations - private'!
+divideMultipliedUnit: aMultipliedUnit
+
+	^self class dividedUnit: self multipliedUnit: aMultipliedUnit! !
+
+!DividedUnit methodsFor: 'mathematic operations - private'!
+divideNullUnit: aNullUnit 
+	
+	^self class nullUnit: aNullUnit dividedUnit: self! !
+
+!DividedUnit methodsFor: 'mathematic operations - private'!
+divideSimpleUnit: aUnit
+
+	^self class dividedUnit: self simpleUnit: aUnit! !
+
+!DividedUnit methodsFor: 'accessing'!
+hash
+
+	^numerator hash bitXor: denominator hash! !
+
+!DividedUnit methodsFor: 'initialization'!
+initializeNumerator: aUnit denominator: anotherUnit
+
+	numerator := aUnit.
+	denominator := anotherUnit! !
+
+!DividedUnit methodsFor: 'mathematic operations'!
+multiplyByUnit: aUnit
+
+	^aUnit multiplyDividedUnit: self! !
+
+!DividedUnit methodsFor: 'mathematic operations - private'!
+multiplyDividedUnit: aDividedUnit
+
+	^MultipliedUnit dividedUnit: aDividedUnit dividedUnit: self! !
+
+!DividedUnit methodsFor: 'mathematic operations - private'!
+multiplyMultipliedUnit: aMultipliedUnit
+
+	^MultipliedUnit multipliedUnit: aMultipliedUnit dividedUnit: self! !
+
+!DividedUnit methodsFor: 'mathematic operations - private'!
+multiplySimpleUnit: aUnit
+
+	^MultipliedUnit simpleUnit: aUnit dividedUnit: self! !
+
+!DividedUnit methodsFor: 'accessing'!
+nameForMany
+
+	^numerator nameForMany asString , '/' 
+		, denominator nameForMany asString! !
+
+!DividedUnit methodsFor: 'accessing'!
+nameForOne
+
+	^numerator name asString , '/' , denominator name asString! !
+
+!DividedUnit methodsFor: 'accessing'!
+numerator
+
+	^numerator! !
+
+!DividedUnit methodsFor: 'accessing'!
+sign
+
+	^numerator sign, '/', denominator sign! !
+
+!DividedUnit class methodsFor: 'instance creation - private'!
+dividedUnit: aDividedUnit dividedUnit: anotherDividedUnit
+
+	^(aDividedUnit numerator * anotherDividedUnit denominator) / (aDividedUnit denominator * anotherDividedUnit numerator)
+! !
+
+!DividedUnit class methodsFor: 'instance creation - private'!
+dividedUnit: aDividedUnit multipliedUnit: aMultipliedUnit
+
+	^(aDividedUnit numerator) / (aDividedUnit denominator * aMultipliedUnit)
+! !
+
+!DividedUnit class methodsFor: 'instance creation - private'!
+dividedUnit: aDividedUnit simpleUnit: aUnit
+
+	^(aDividedUnit numerator) / (aDividedUnit denominator * aUnit)
+! !
+
+!DividedUnit class methodsFor: 'instance creation - private'!
+multipliedUnit: aMultipliedUnit dividedUnit: aDividedUnit
+
+	^(aMultipliedUnit * aDividedUnit denominator) / (aDividedUnit numerator)
+! !
+
+!DividedUnit class methodsFor: 'instance creation - private'!
+multipliedUnit: aMultipliedUnit multipliedUnit: anotherMultipliedUnit
+
+	| numeratorFactors denominatorFactors numerator denominator |
+
+	numeratorFactors := aMultipliedUnit factors.
+	denominatorFactors := OrderedCollection new.
+
+	anotherMultipliedUnit factors
+		do: [:aUnit | numeratorFactors remove: aUnit ifAbsent: [denominatorFactors add: aUnit]].
+
+	numerator := MultipliedUnit factors: numeratorFactors.
+	denominator := MultipliedUnit factors: denominatorFactors.
+
+	^denominator = NullUnit new
+		ifTrue: [numerator]
+		ifFalse: [self new initializeNumerator: numerator denominator: denominator]! !
+
+!DividedUnit class methodsFor: 'instance creation - private'!
+multipliedUnit: aMultipliedUnit simpleUnit: aUnit
+
+	| numeratorFactors |
+	
+	numeratorFactors := aMultipliedUnit factors.
+	numeratorFactors remove: aUnit ifAbsent: [ ^self new initializeNumerator: aMultipliedUnit denominator: aUnit ].
+	
+	^MultipliedUnit factors: numeratorFactors
+
+! !
+
+!DividedUnit class methodsFor: 'instance creation - private'!
+nullUnit: aNullUnit dividedUnit: aDividedUnit 
+	
+	^self new initializeNumerator: aDividedUnit denominator denominator: aDividedUnit numerator.! !
+
+!DividedUnit class methodsFor: 'instance creation - private'!
+nullUnit: aNullUnit multipliedUnit: aMultipliedUnit 
+	
+	^self new initializeNumerator: aNullUnit denominator: aMultipliedUnit! !
+
+!DividedUnit class methodsFor: 'instance creation - private'!
+nullUnit: aNullUnit simpleUnit: aSimpleUnit 
+
+	^self new initializeNumerator: aNullUnit denominator: aSimpleUnit
+	! !
+
+!DividedUnit class methodsFor: 'instance creation - private'!
+simpleUnit: aUnit dividedUnit: aDividedUnit
+
+	^(aUnit * aDividedUnit denominator) / (aDividedUnit numerator)
+! !
+
+!DividedUnit class methodsFor: 'instance creation - private'!
+simpleUnit: aUnit multipliedUnit: aMultipliedUnit
+
+	| denominatorFactors |
+	
+	denominatorFactors := aMultipliedUnit factors.
+	denominatorFactors remove: aUnit ifAbsent: [ ^self new initializeNumerator: aUnit denominator: aMultipliedUnit ].
+	
+	"It never can be left NullUnit on NullUnit because aMultipliedUnit has like minimum 2 units"
+	^self new initializeNumerator: NullUnit new denominator: (MultipliedUnit factors: denominatorFactors)! !
+
+!DividedUnit class methodsFor: 'instance creation - private'!
+simpleUnit: aUnit simpleUnit: anotherUnit
+
+	^aUnit=anotherUnit
+		ifTrue: [ NullUnit new ]
+		ifFalse: [ self new initializeNumerator: aUnit denominator: anotherUnit ]! !
+
+!MultipliedUnit methodsFor: 'comparing'!
+= anObject
+
+	^self class = anObject class and: [ self hasSameFactorsAs: anObject ]! !
+
+!MultipliedUnit methodsFor: 'mathematic operations'!
+divFrom: aNumber
+
+	^(DividedUnit nullUnit: aNumber unit multipliedUnit: self) with: aNumber! !
+
+!MultipliedUnit methodsFor: 'mathematic operations'!
+divideByUnit: aUnit
+
+	^aUnit divideMultipliedUnit: self! !
+
+!MultipliedUnit methodsFor: 'mathematic operations - private'!
+divideDividedUnit: aDividedUnit
+
+	^DividedUnit multipliedUnit: self dividedUnit: aDividedUnit! !
+
+!MultipliedUnit methodsFor: 'mathematic operations - private'!
+divideMultipliedUnit: aMultipliedUnit
+
+	^DividedUnit multipliedUnit: self multipliedUnit: aMultipliedUnit! !
+
+!MultipliedUnit methodsFor: 'mathematic operations - private'!
+divideNullUnit: aNullUnit 
+	
+	^DividedUnit nullUnit: aNullUnit multipliedUnit: self! !
+
+!MultipliedUnit methodsFor: 'mathematic operations - private'!
+divideSimpleUnit: aUnit
+
+	^DividedUnit multipliedUnit: self simpleUnit: aUnit! !
+
+!MultipliedUnit methodsFor: 'accessing'!
+factors
+	
+	^factors copy! !
+
+!MultipliedUnit methodsFor: 'accessing'!
+factorsSize
+
+	^factors size! !
+
+!MultipliedUnit methodsFor: 'accessing - private'!
+factorsToStreamDoing: aBlock
+
+	| stream |
+
+	stream := WriteStream on: String new.
+	factors do: [:aUnit |
+		stream nextPutAll: (aBlock value: aUnit).
+		stream nextPut: $.].
+	stream skip: -1.
+	^stream contents! !
+
+!MultipliedUnit methodsFor: 'testing'!
+hasSameFactorsAs: aMultipliedUnit
+	
+	| factorsIntersection |
+	
+	factorsIntersection := aMultipliedUnit factors.
+	factors do: [:aUnit | factorsIntersection remove: aUnit ifAbsent: [ ^false ] ].
+	
+	^factorsIntersection isEmpty
+
+		! !
+
+!MultipliedUnit methodsFor: 'accessing'!
+hash
+
+	^factors inject: 0 into: [ :aHash :aUnit | aHash bitXor: aUnit hash ]! !
+
+!MultipliedUnit methodsFor: 'initialization'!
+initializeFactors: aCollection
+
+	factors := aCollection! !
+
+!MultipliedUnit methodsFor: 'mathematic operations'!
+multiplyByUnit: aUnit
+
+	^aUnit multiplyMultipliedUnit: self! !
+
+!MultipliedUnit methodsFor: 'mathematic operations - private'!
+multiplyDividedUnit: aDividedUnit
+
+	^self class dividedUnit: aDividedUnit multipliedUnit: self! !
+
+!MultipliedUnit methodsFor: 'mathematic operations - private'!
+multiplyMultipliedUnit: aMultipliedUnit
+
+	^self class multipliedUnit: aMultipliedUnit multipliedUnit: self! !
+
+!MultipliedUnit methodsFor: 'mathematic operations - private'!
+multiplySimpleUnit: aUnit
+
+	^self class simpleUnit: aUnit multipliedUnit: self! !
+
+!MultipliedUnit methodsFor: 'accessing'!
+nameForMany
+
+	^self factorsToStreamDoing: [:aUnit | aUnit nameForMany asString]! !
+
+!MultipliedUnit methodsFor: 'accessing'!
+nameForOne
+
+	^self factorsToStreamDoing: [:aUnit | aUnit nameForOne asString]! !
+
+!MultipliedUnit methodsFor: 'accessing'!
+sign
+
+	^self factorsToStreamDoing: [ :aUnit | aUnit sign ]! !
+
+!MultipliedUnit class methodsFor: 'instance creation - private'!
+dividedUnit: aDividedUnit dividedUnit: anotherDividedUnit
+
+	^(aDividedUnit numerator * anotherDividedUnit numerator) / (aDividedUnit denominator * anotherDividedUnit denominator)! !
+
+!MultipliedUnit class methodsFor: 'instance creation - private'!
+dividedUnit: aDividedUnit multipliedUnit: aMultipliedUnit
+
+	^self multipliedUnit: aMultipliedUnit dividedUnit: aDividedUnit! !
+
+!MultipliedUnit class methodsFor: 'instance creation - private'!
+dividedUnit: aDividedUnit simpleUnit: aUnit
+
+	^self simpleUnit: aUnit dividedUnit: aDividedUnit! !
+
+!MultipliedUnit class methodsFor: 'instance creation - private'!
+factors: aCollection
+
+	aCollection isEmpty ifTrue: [ ^NullUnit new ].
+	aCollection size=1 ifTrue: [ ^aCollection first ].
+	^self new initializeFactors: aCollection! !
+
+!MultipliedUnit class methodsFor: 'instance creation - private'!
+multipliedUnit: aMultipliedUnit dividedUnit: aDividedUnit
+
+	^(aMultipliedUnit * aDividedUnit numerator) / (aDividedUnit denominator)! !
+
+!MultipliedUnit class methodsFor: 'instance creation - private'!
+multipliedUnit: aMultipliedUnit multipliedUnit: anotherMultipliedUnit
+
+	| factors |
+	
+	factors := aMultipliedUnit factors.
+	factors addAll: anotherMultipliedUnit factors.
+	
+	^self new initializeFactors: factors.! !
+
+!MultipliedUnit class methodsFor: 'instance creation - private'!
+multipliedUnit: aMultipliedUnit simpleUnit: aUnit
+
+	^self simpleUnit: aUnit multipliedUnit: aMultipliedUnit! !
+
+!MultipliedUnit class methodsFor: 'instance creation - private'!
+simpleUnit: aUnit dividedUnit: aDividedUnit
+
+	^(aUnit * aDividedUnit numerator) / (aDividedUnit denominator)! !
+
+!MultipliedUnit class methodsFor: 'instance creation - private'!
+simpleUnit: aUnit multipliedUnit: aMultipliedUnit
+
+	| factors |
+	
+	factors := aMultipliedUnit factors.
+	factors add: aUnit.
+	
+	^self new initializeFactors: factors! !
+
+!MultipliedUnit class methodsFor: 'instance creation - private'!
+simpleUnit: aUnit simpleUnit: anotherUnit
+
+	^self new initializeFactors: (OrderedCollection with: aUnit with: anotherUnit)! !
+
+!NullUnit methodsFor: 'accessing'!
+baseUnit
+	
+	^self! !
+
+!NullUnit methodsFor: 'converting'!
+convertAmountFromBaseUnit: aNumber
+
+	^0! !
+
+!NullUnit methodsFor: 'converting'!
+convertAmountToBaseUnit: aNumber
+
+	^0! !
+
+!NullUnit methodsFor: 'converting - private'!
+convertFromBaseUnit: aMeasure 
+	
+	^aMeasure! !
+
+!NullUnit methodsFor: 'converting - private'!
+convertToBaseUnit: aMeasure 
+	
+	^aMeasure! !
+
+!NullUnit methodsFor: 'mathematic operations'!
+divideByUnit: aUnit
+
+	^aUnit! !
+
+!NullUnit methodsFor: 'mathematic operations - private'!
+divideDividedUnit: aDividedUnit
+
+	^aDividedUnit reciprocal! !
+
+!NullUnit methodsFor: 'mathematic operations - private'!
+divideMultipliedUnit: aMultipliedUnit
+
+	^DividedUnit nullUnit: self multipliedUnit: aMultipliedUnit! !
+
+!NullUnit methodsFor: 'mathematic operations - private'!
+divideNullUnit: aNullUnit 
+	
+	^self! !
+
+!NullUnit methodsFor: 'mathematic operations - private'!
+divideSimpleUnit: aUnit
+
+	^DividedUnit nullUnit: self simpleUnit: aUnit! !
+
+!NullUnit methodsFor: 'mathematic operations'!
+multiplyByUnit: aUnit
+
+	^aUnit! !
+
+!NullUnit methodsFor: 'mathematic operations - private'!
+multiplyDividedUnit: aDividedUnit
+
+	^aDividedUnit! !
+
+!NullUnit methodsFor: 'mathematic operations - private'!
+multiplyMultipliedUnit: aMultipliedUnit
+
+	^aMultipliedUnit! !
+
+!NullUnit methodsFor: 'mathematic operations - private'!
+multiplySimpleUnit: aUnit
+
+	^aUnit! !
+
+!NullUnit methodsFor: 'accessing'!
+name
+
+	^''! !
+
+!NullUnit methodsFor: 'accessing'!
+nameForMany
+
+	^self name! !
+
+!NullUnit methodsFor: 'accessing'!
+nameForOne
+
+	^self name! !
+
+!NullUnit methodsFor: 'accessing'!
+nothingAmount
+	
+	^0! !
+
+!NullUnit methodsFor: 'accessing'!
+sign
+
+	^self class defaultSign! !
+
+!NullUnit methodsFor: 'measurement creation'!
+with: aNumber
+
+	^aNumber! !
+
+!NullUnit class methodsFor: 'initialization' stamp: 'HAW 3/25/2017 21:00:31'!
+afterLoadInitialization
+
+	self initialize! !
+
+!NullUnit class methodsFor: 'initialization' stamp: 'HAW 3/25/2017 20:59:51'!
+initialize
+
+	uniqueInstance isNil ifTrue: [ self initializeUniqueInstance ]! !
+
+!NullUnit class methodsFor: 'initialization' stamp: 'HernanWilkinson 11/28/2009 19:04'!
+initializeUniqueInstance
+
+	uniqueInstance := super new.! !
+
+!NullUnit class methodsFor: 'instance creation' stamp: 'HernanWilkinson 11/28/2009 22:11'!
+new
+
+	^uniqueInstance! !
+
+!SimpleUnit methodsFor: 'mathematic operations' stamp: 'HAW 3/25/2017 19:11:51'!
+divFrom: aNumber
+
+	^SimpleMeasure amount: aNumber unit: NullUnit new / self! !
+
+!SimpleUnit methodsFor: 'mathematic operations'!
+divideByUnit: aUnit
+
+	^aUnit divideSimpleUnit: self! !
+
+!SimpleUnit methodsFor: 'mathematic operations - private'!
+divideDividedUnit: aDividedUnit
+
+	^DividedUnit simpleUnit: self dividedUnit: aDividedUnit! !
+
+!SimpleUnit methodsFor: 'mathematic operations - private'!
+divideMultipliedUnit: aMultipliedUnit
+
+	^DividedUnit simpleUnit: self multipliedUnit: aMultipliedUnit! !
+
+!SimpleUnit methodsFor: 'mathematic operations - private'!
+divideNullUnit: aNullUnit 
+
+	^DividedUnit nullUnit: aNullUnit simpleUnit: self! !
+
+!SimpleUnit methodsFor: 'mathematic operations - private'!
+divideSimpleUnit: aUnit
+
+	^DividedUnit simpleUnit: self simpleUnit: aUnit
+! !
+
+!SimpleUnit methodsFor: 'mathematic operations'!
+multiplyByUnit: aUnit
+
+	^aUnit multiplySimpleUnit: self! !
+
+!SimpleUnit methodsFor: 'mathematic operations - private'!
+multiplyDividedUnit: aDividedUnit
+
+	^MultipliedUnit dividedUnit: aDividedUnit simpleUnit: self! !
+
+!SimpleUnit methodsFor: 'mathematic operations - private'!
+multiplyMultipliedUnit: aMultipliedUnit
+
+	^MultipliedUnit multipliedUnit: aMultipliedUnit simpleUnit: self! !
+
+!SimpleUnit methodsFor: 'mathematic operations - private'!
+multiplySimpleUnit: aUnit
+
+	^MultipliedUnit simpleUnit: self simpleUnit: aUnit! !
+
+!SimpleUnit methodsFor: 'measurement creation' stamp: 'HAW 3/25/2017 19:11:51'!
+with: aNumber
+
+	^SimpleMeasure amount: aNumber unit: self! !
+
+!BaseUnit methodsFor: 'comparing' stamp: 'HernanWilkinson 5/14/2012 17:34'!
+= anObject
+
+	^ (anObject isKindOf: self class) and: [ self name = anObject name ]! !
+
+!BaseUnit methodsFor: 'accessing'!
+baseUnit
+	
+	^self! !
+
+!BaseUnit methodsFor: 'converting'!
+convertAmountToBaseUnit: aNumber
+
+	^aNumber
+! !
+
+!BaseUnit methodsFor: 'converting - private'!
+convertFromBaseUnit: aMeasure 
+	
+	^aMeasure! !
+
+!BaseUnit methodsFor: 'converting - private'!
+convertToBaseUnit: aMeasure 
+	
+	^aMeasure! !
+
+!BaseUnit methodsFor: 'initialization'!
+initializeNameFomOne: aString nameForMany: anotherString sign: aSignString
+
+	nameForOne := aString.
+	nameForMany := anotherString.
+	sign := aSignString.! !
+
+!BaseUnit methodsFor: 'accessing'!
+nameForMany
+
+	^nameForMany! !
+
+!BaseUnit methodsFor: 'accessing'!
+nameForOne
+
+	^nameForOne! !
+
+!BaseUnit methodsFor: 'accessing'!
+nothingAmount
+
+	^0! !
+
+!BaseUnit methodsFor: 'accessing'!
+sign
+
+	^sign! !
+
+!BaseUnit class methodsFor: 'instance creation'!
+nameForOne: aString nameForMany: anotherString
+
+	^self new initializeNameFomOne: aString nameForMany: anotherString sign: self defaultSign! !
+
+!BaseUnit class methodsFor: 'instance creation'!
+nameForOne: aString nameForMany: anotherString sign: aSignString
+
+	^self new initializeNameFomOne: aString nameForMany: anotherString sign: aSignString! !
+
+!BaseUnit class methodsFor: 'instance creation'!
+named: aString 
+
+	^self 
+		nameForOne: aString
+		nameForMany: (self nameForManyFrom: aString)
+		sign: self defaultSign.
+! !
+
+!BaseUnit class methodsFor: 'instance creation'!
+named: aString sign: aSignString
+
+	^self 
+		nameForOne: aString
+		nameForMany: (self nameForManyFrom: aString)
+		sign: aSignString
+! !
+
+!DerivedUnit methodsFor: 'converting - private'!
+convertAmountFromBaseUnit: aNumber
+
+	self subclassResponsibility! !
+
+!DerivedUnit methodsFor: 'converting - private' stamp: 'HAW 3/25/2017 19:11:51'!
+convertFromBaseUnit: aSimpleMeasure 
+
+	^SimpleMeasure amount: (self convertAmountFromBaseUnit: aSimpleMeasure amount) unit: self! !
+
+!DerivedUnit methodsFor: 'converting - private' stamp: 'HAW 3/25/2017 19:11:51'!
+convertToBaseUnit: aSimpleMeasure 
+	
+	^SimpleMeasure 
+		amount: (self convertAmountToBaseUnit: aSimpleMeasure amount)
+		unit: self baseUnit! !
+
+!DerivedUnit methodsFor: 'accessing'!
+nothingAmount
+
+	^self convertAmountFromBaseUnit: self baseUnit nothingAmount! !
+
+!NotProportionalDerivedUnit methodsFor: 'accessing'!
+baseUnit
+
+	^baseUnit! !
+
+!NotProportionalDerivedUnit methodsFor: 'converting - private'!
+convertAmountFromBaseUnit: aNumber
+
+	^reciprocalConversionBlock value: aNumber! !
+
+!NotProportionalDerivedUnit methodsFor: 'converting'!
+convertAmountToBaseUnit: aNumber
+
+	^conversionBlock value: aNumber! !
+
+!NotProportionalDerivedUnit methodsFor: 'initialization'!
+initializeBaseUnit: aUnit conversionBlock: aBlock reciprocalConversionBlock: anotherBlock nameForOne: aString nameForMany: anotherString sign: aSignString
+
+	baseUnit := aUnit.
+	conversionBlock := aBlock.
+	reciprocalConversionBlock := anotherBlock.
+	nameForOne := aString.
+	nameForMany := anotherString.
+	sign := aSignString! !
+
+!NotProportionalDerivedUnit methodsFor: 'accessing'!
+nameForMany
+
+	^nameForMany! !
+
+!NotProportionalDerivedUnit methodsFor: 'accessing'!
+nameForOne
+
+	^nameForOne! !
+
+!NotProportionalDerivedUnit methodsFor: 'accessing'!
+sign
+
+	^sign! !
+
+!NotProportionalDerivedUnit class methodsFor: 'instance creation'!
+baseUnit: aUnit conversionBlock: aBlock reciprocalConversionBlock: anotherBlock nameForOne: aString nameForMany: anotherString sign: aSignString 
+
+	^self new 
+		initializeBaseUnit: aUnit
+		conversionBlock: aBlock
+		reciprocalConversionBlock: anotherBlock
+		nameForOne: aString
+		nameForMany: anotherString
+		sign: aSignString! !
+
+!NotProportionalDerivedUnit class methodsFor: 'instance creation'!
+baseUnit: aUnit conversionBlock: aBlock reciprocalConversionBlock: anotherBlock named: aString
+
+	^self 
+		baseUnit: aUnit
+		conversionBlock: aBlock
+		reciprocalConversionBlock: anotherBlock
+		nameForOne: aString
+		nameForMany: (self nameForManyFrom: aString)
+		sign: self defaultSign! !
+
+!NotProportionalDerivedUnit class methodsFor: 'instance creation'!
+baseUnit: aUnit conversionBlock: aBlock reciprocalConversionBlock: anotherBlock named: aString sign: aSignString
+
+	^self 
+		baseUnit: aUnit
+		conversionBlock: aBlock
+		reciprocalConversionBlock: anotherBlock
+		nameForOne: aString
+		nameForMany: (self nameForManyFrom: aString)
+		sign: aSignString! !
+
+!ProportionalDerivedUnit methodsFor: 'accessing'!
+baseUnit
+
+	^baseUnit! !
+
+!ProportionalDerivedUnit methodsFor: 'accessing'!
+conversionFactor
+	
+	^conversionFactor! !
+
+!ProportionalDerivedUnit methodsFor: 'converting - private'!
+convertAmountFromBaseUnit: aNumber
+
+	^aNumber / conversionFactor! !
+
+!ProportionalDerivedUnit methodsFor: 'converting'!
+convertAmountToBaseUnit: aNumber
+
+	^aNumber * conversionFactor! !
+
+!ProportionalDerivedUnit methodsFor: 'initialization'!
+initializeBaseUnit: aUnit conversionFactor: aNumber nameForOne: aString nameForMany: anotherString sign: aSignString
+
+	baseUnit := aUnit.
+	conversionFactor := aNumber.
+	nameForOne := aString.
+	nameForMany := anotherString.
+	sign := aSignString! !
+
+!ProportionalDerivedUnit methodsFor: 'accessing'!
+nameForMany
+
+	^nameForMany! !
+
+!ProportionalDerivedUnit methodsFor: 'accessing'!
+nameForOne
+
+	^nameForOne! !
+
+!ProportionalDerivedUnit methodsFor: 'accessing'!
+sign
+
+	^sign! !
+
+!ProportionalDerivedUnit class methodsFor: 'instance creation'!
+baseUnit: aUnit conversionFactor: aNumber nameForOne: aString nameForMany: anotherString sign: aSignString
+
+	^self new 
+		initializeBaseUnit: aUnit
+		conversionFactor: aNumber
+		nameForOne: aString
+		nameForMany: anotherString
+		sign: aSignString! !
+
+!ProportionalDerivedUnit class methodsFor: 'instance creation'!
+baseUnit: aUnit conversionFactor: aNumber named: aString
+
+	^self 
+		baseUnit: aUnit
+		conversionFactor: aNumber
+		nameForOne: aString
+		nameForMany: (self nameForManyFrom: aString)
+		sign: self defaultSign! !
+
+!ProportionalDerivedUnit class methodsFor: 'instance creation'!
+baseUnit: aUnit conversionFactor: aNumber named: aString sign: aSignString
+
+	^self 
+		baseUnit: aUnit
+		conversionFactor: aNumber
+		nameForOne: aString
+		nameForMany: (self nameForManyFrom: aString)
+		sign: aSignString! !
+
+!UnitConversionFunctionInterface methodsFor: 'evaluating'!
+value: anObject
+
+	^self subclassResponsibility! !
+
+!ProportionalUnitConversionFunction methodsFor: 'comparing'!
+= anotherProportionalUnitConvertionFunction
+
+	^self class=anotherProportionalUnitConvertionFunction class and: 
+		[ sourceMeasure=anotherProportionalUnitConvertionFunction sourceMeasure and: 
+		[ equivalentMeasure=anotherProportionalUnitConvertionFunction equivalentMeasure ] ]! !
+
+!ProportionalUnitConversionFunction methodsFor: 'accessing'!
+equivalentMeasure
+
+	^equivalentMeasure! !
+
+!ProportionalUnitConversionFunction methodsFor: 'accessing'!
+hash
+
+	^sourceMeasure hash bitXor: equivalentMeasure hash.
+! !
+
+!ProportionalUnitConversionFunction methodsFor: 'initialization'!
+initializeMeasure: aSourceMeasure isEquivalentTo: aEquivalentMeasure
+
+	sourceMeasure := aSourceMeasure.
+	equivalentMeasure := aEquivalentMeasure.
+	proportionalMeasure := aEquivalentMeasure / aSourceMeasure! !
+
+!ProportionalUnitConversionFunction methodsFor: 'printing'!
+printOn: aStream
+
+	equivalentMeasure printOn: aStream.
+	aStream nextPutAll: ' / '.
+	sourceMeasure printOn: aStream.
+	aStream nextPutAll: '* valueToConvert'! !
+
+!ProportionalUnitConversionFunction methodsFor: 'accessing'!
+proportionalMeasure 
+
+	^proportionalMeasure
+! !
+
+!ProportionalUnitConversionFunction methodsFor: 'accessing'!
+sourceMeasure 
+
+	^sourceMeasure
+! !
+
+!ProportionalUnitConversionFunction methodsFor: 'evaluating'!
+value: aMeasure
+
+	^proportionalMeasure * aMeasure! !
+
+!ProportionalUnitConversionFunction class methodsFor: 'instance creation'!
+assertCreationPreconditions: aSourceMeasure equivalentMeasure: aEquivalentMeasure
+
+	(aSourceMeasure isNothing 
+		or: [aSourceMeasure sameDomainAs: aEquivalentMeasure]) 
+			ifTrue: 
+				[InvalidProportionalUnitConversionFunctionException 
+					signalSourceMeasure: aSourceMeasure
+					equivalentMeasure: aEquivalentMeasure]! !
+
+!ProportionalUnitConversionFunction class methodsFor: 'instance creation'!
+measure: aSourceMeasure isProportionalTo: aEquivalentMeasure
+
+	self assertCreationPreconditions: aSourceMeasure
+		equivalentMeasure: aEquivalentMeasure.
+	^self new initializeMeasure: aSourceMeasure
+		isEquivalentTo: aEquivalentMeasure! !
+
+!UnitConversionRuleInterface methodsFor: 'converting'!
+convertsFrom: aSourceUnit to: aTargetUnit
+
+	^(self sourceUnit sameDomainAs: aSourceUnit) and: [ self targetUnit sameDomainAs: aTargetUnit ]! !
+
+!UnitConversionRuleInterface methodsFor: 'converting'!
+convertsSameDomainsAs: aUnitConvertionRule
+
+	^self convertsFrom: aUnitConvertionRule sourceUnit to: aUnitConvertionRule targetUnit! !
+
+!UnitConversionRuleInterface methodsFor: 'accessing'!
+function
+
+	self subclassResponsibility! !
+
+!UnitConversionRuleInterface methodsFor: 'accessing'!
+sourceUnit
+
+	self subclassResponsibility! !
+
+!UnitConversionRuleInterface methodsFor: 'accessing'!
+targetUnit
+
+	self subclassResponsibility! !
+
+!UnitConversionRuleInterface methodsFor: 'converting'!
+value: aMeasure
+
+	self subclassResponsibility! !
+
+!UnitConversionRule methodsFor: 'comparing'!
+= anotherConvertionRule
+
+	^self class=anotherConvertionRule class and: 
+		[ (self convertsSameDomainsAs: anotherConvertionRule) and:
+		[ function=anotherConvertionRule function ] ].! !
+
+!UnitConversionRule methodsFor: 'accessing'!
+function
+
+	^function! !
+
+!UnitConversionRule methodsFor: 'accessing'!
+hash
+
+	^sourceUnit hash bitXor: targetUnit hash.! !
+
+!UnitConversionRule methodsFor: 'initialization'!
+initializeFrom: aSourceUnit to: aTargetUnit using: aFunction
+
+	sourceUnit := aSourceUnit.
+	targetUnit := aTargetUnit.
+	function := aFunction! !
+
+!UnitConversionRule methodsFor: 'printing'!
+printOn: aStream
+
+	sourceUnit printOn: aStream.
+	aStream nextPutAll: ' -> '.
+	targetUnit printOn: aStream.
+	aStream nextPutAll: ': '.
+	function printOn: aStream! !
+
+!UnitConversionRule methodsFor: 'accessing'!
+sourceUnit
+
+	^sourceUnit! !
+
+!UnitConversionRule methodsFor: 'accessing'!
+targetUnit
+
+	^targetUnit! !
+
+!UnitConversionRule methodsFor: 'converting'!
+value: aMeasure
+
+	^function value: aMeasure! !
+
+!UnitConversionRule class methodsFor: 'instance creation'!
+from: aSourceUnit to: aTargetUnit use: aFunction
+
+	^self new initializeFrom: aSourceUnit to: aTargetUnit using: aFunction! !
+
+!UnitConversionRuleToEdgeAdapter methodsFor: 'comparing'!
+= anotherConvertionRuleToEdgeAdapter
+
+	^self class=anotherConvertionRuleToEdgeAdapter class and: 
+		[ unitConversionRule=anotherConvertionRuleToEdgeAdapter unitConversionRule ]
+	! !
+
+!UnitConversionRuleToEdgeAdapter methodsFor: 'edge protocol'!
+convergesTo: aUnit
+
+	^unitConversionRule targetUnit sameDomainAs: aUnit
+	! !
+
+!UnitConversionRuleToEdgeAdapter methodsFor: 'edge protocol'!
+convergesToSelf
+
+	^unitConversionRule sourceUnit sameDomainAs: unitConversionRule targetUnit
+	! !
+
+!UnitConversionRuleToEdgeAdapter methodsFor: 'accessing'!
+function
+
+	^unitConversionRule function! !
+
+!UnitConversionRuleToEdgeAdapter methodsFor: 'edge protocol'!
+goesFrom: aSourceUnit to: aTargetUnit
+
+	^unitConversionRule convertsFrom: aSourceUnit to: aTargetUnit
+	! !
+
+!UnitConversionRuleToEdgeAdapter methodsFor: 'edge protocol'!
+hash
+
+	^unitConversionRule hash
+	! !
+
+!UnitConversionRuleToEdgeAdapter methodsFor: 'initialization'!
+initializeWith: aConvertionRule
+
+	unitConversionRule := aConvertionRule! !
+
+!UnitConversionRuleToEdgeAdapter methodsFor: 'printing'!
+printOn: aStream
+
+	unitConversionRule printOn: aStream! !
+
+!UnitConversionRuleToEdgeAdapter methodsFor: 'edge protocol'!
+source
+
+	^unitConversionRule sourceUnit! !
+
+!UnitConversionRuleToEdgeAdapter methodsFor: 'accessing'!
+sourceUnit
+
+	^unitConversionRule sourceUnit! !
+
+!UnitConversionRuleToEdgeAdapter methodsFor: 'edge protocol'!
+startsOn: aUnit
+
+	^unitConversionRule sourceUnit sameDomainAs: aUnit! !
+
+!UnitConversionRuleToEdgeAdapter methodsFor: 'edge protocol'!
+target
+
+	^unitConversionRule targetUnit! !
+
+!UnitConversionRuleToEdgeAdapter methodsFor: 'accessing'!
+targetUnit
+
+	^unitConversionRule targetUnit! !
+
+!UnitConversionRuleToEdgeAdapter methodsFor: 'accessing'!
+unitConversionRule
+
+	^unitConversionRule! !
+
+!UnitConversionRuleToEdgeAdapter methodsFor: 'converting'!
+value: aMeasure
+
+	^unitConversionRule value: aMeasure! !
+
+!UnitConversionRuleToEdgeAdapter class methodsFor: 'instance creation'!
+for: aConvertionRule
+
+	^self new initializeWith: aConvertionRule! !
 
 !ArithmeticObject methodsFor: 'arithmetic operations'!
 * aMeasure
@@ -12535,6 +14235,41 @@ stepsFrom: from to: to by: by
 
 	self subclassResponsibility! !
 
+!InfinityIntervalStrategy methodsFor: 'enumerating'!
+advanceFrom: from by: by
+
+	^from + by! !
+
+!InfinityIntervalStrategy methodsFor: 'enumerating'!
+advanceFrom: from steps: steps by: by
+
+	^from + (steps * by)! !
+
+!InfinityIntervalStrategy methodsFor: 'enumerating' stamp: 'HernanWilkinson 11/28/2009 20:10'!
+stepsFrom: from to: to by: by
+
+	^InfinityDefinition new! !
+
+!InfinityIntervalStrategy class methodsFor: 'initialization' stamp: 'HAW 3/25/2017 21:00:16'!
+afterLoadInitialization
+
+	self initialize! !
+
+!InfinityIntervalStrategy class methodsFor: 'initialization' stamp: 'HAW 3/25/2017 20:59:35'!
+initialize
+
+	uniqueInstance isNil ifTrue: [ self initializeUniqueInstance ]! !
+
+!InfinityIntervalStrategy class methodsFor: 'initialization' stamp: 'HernanWilkinson 11/28/2009 19:03'!
+initializeUniqueInstance
+
+	uniqueInstance := super new.! !
+
+!InfinityIntervalStrategy class methodsFor: 'instance creation'!
+new
+
+	^uniqueInstance! !
+
 !ArithmeticObjectIntervalStrategy methodsFor: 'enumerating'!
 advanceFrom: from by: by
 
@@ -12591,41 +14326,6 @@ advanceFrom: from steps: steps by: by
 stepsFrom: from to: to by: by
 
 	^to number - from number / by number! !
-
-!InfinityIntervalStrategy methodsFor: 'enumerating'!
-advanceFrom: from by: by
-
-	^from + by! !
-
-!InfinityIntervalStrategy methodsFor: 'enumerating'!
-advanceFrom: from steps: steps by: by
-
-	^from + (steps * by)! !
-
-!InfinityIntervalStrategy methodsFor: 'enumerating' stamp: 'HernanWilkinson 11/28/2009 20:10'!
-stepsFrom: from to: to by: by
-
-	^InfinityDefinition new! !
-
-!InfinityIntervalStrategy class methodsFor: 'initialization' stamp: 'HAW 3/25/2017 21:00:16'!
-afterLoadInitialization
-
-	self initialize! !
-
-!InfinityIntervalStrategy class methodsFor: 'initialization' stamp: 'HAW 3/25/2017 20:59:35'!
-initialize
-
-	uniqueInstance isNil ifTrue: [ self initializeUniqueInstance ]! !
-
-!InfinityIntervalStrategy class methodsFor: 'initialization' stamp: 'HernanWilkinson 11/28/2009 19:03'!
-initializeUniqueInstance
-
-	uniqueInstance := super new.! !
-
-!InfinityIntervalStrategy class methodsFor: 'instance creation'!
-new
-
-	^uniqueInstance! !
 
 !NumberToArithmeticObjectAdapter methodsFor: 'arithmetic operations'!
 * anArithmeticObject
@@ -13151,1694 +14851,8 @@ for: aGraph
 	self assertAcyclic: aGraph.
 
 	^self new initializeFor: aGraph! !
-
-!CircularReadStream methodsFor: 'enumerating - private' stamp: 'mx 11/1/2007 20:33'!
-advancePositions: aMeasure
-
-	| amount |
-	
-	amount := (aMeasure convertTo: unit) floor amount.
-	position := ((position - 1 + amount) \\ collection size) + 1! !
-
-!CircularReadStream methodsFor: 'testing' stamp: 'mx 11/21/2007 15:23'!
-atBegin
-
-	^position = 1! !
-
-!CircularReadStream methodsFor: 'testing' stamp: 'mx 11/21/2007 15:23'!
-atEnd
-
-	^position = collection size! !
-
-!CircularReadStream methodsFor: 'accessing' stamp: 'mx 11/21/2007 09:07'!
-current
-
-	^collection at: position! !
-
-!CircularReadStream methodsFor: 'querying' stamp: 'mx 11/1/2007 20:27'!
-distanceFrom: anObject
-
-	^self distanceFrom: anObject toObjectPosition: position! !
-
-!CircularReadStream methodsFor: 'querying' stamp: 'mx 11/1/2007 20:28'!
-distanceFrom: anObject to: anotherObject
-
-	^self distanceFrom: anObject toObjectPosition: (collection indexOf: anotherObject)! !
-
-!CircularReadStream methodsFor: 'querying' stamp: 'mx 11/1/2007 20:26'!
-distanceFrom: anObject toObjectPosition: aToObjectPosition
-
-	| fromObjectPosition steps |
-
-	fromObjectPosition := collection indexOf: anObject.
-	steps := aToObjectPosition >= fromObjectPosition 
-		ifTrue: [aToObjectPosition - fromObjectPosition]
-		ifFalse: [collection size - fromObjectPosition + aToObjectPosition].
-	^unit with: steps! !
-
-!CircularReadStream methodsFor: 'querying' stamp: 'mx 11/21/2007 09:09'!
-distanceTo: anObject
-
-	^self distanceTo: anObject from: self current! !
-
-!CircularReadStream methodsFor: 'querying' stamp: 'mx 10/1/2007 21:03'!
-distanceTo: anObject from: anotherObject
-
-	^self distanceFrom: anotherObject to: anObject! !
-
-!CircularReadStream methodsFor: 'accessing' stamp: 'mx 2/21/2008 21:40'!
-first
-
-	^collection first! !
-
-!CircularReadStream methodsFor: 'conditional protocol' stamp: 'mx 11/17/2007 13:50'!
-ifAtBeginDo: aBlock else: anotherBlock
-
-	^self atBegin
-		ifTrue: aBlock
-		ifFalse: anotherBlock! !
-
-!CircularReadStream methodsFor: 'conditional protocol' stamp: 'mx 11/17/2007 13:49'!
-ifAtEndDo: aBlock else: anotherBlock
-
-	^self atEnd
-		ifTrue: aBlock
-		ifFalse: anotherBlock! !
-
-!CircularReadStream methodsFor: 'initialization' stamp: 'mx 11/21/2007 15:22'!
-initializeOn: aCollection moving: aUnit startingCircleAtIndex: anIndex
-
-	collection := (aCollection copyFrom: anIndex to: aCollection size), (aCollection copyFrom: 1 to: anIndex - 1).
-	unit := aUnit.
-	self upToBegin! !
-
-!CircularReadStream methodsFor: 'collection protocol' stamp: 'mx 11/17/2007 15:59'!
-inject: aMeasure into: aBlock
-
-	^collection inject: aMeasure into: aBlock! !
-
-!CircularReadStream methodsFor: 'testing' stamp: 'mx 11/21/2007 16:12'!
-isPrevious: anObject to: anotherObject
-
-	^(collection indexOf: anObject) < (collection indexOf: anotherObject)! !
-
-!CircularReadStream methodsFor: 'accessing' stamp: 'mx 2/21/2008 20:50'!
-last
-
-	^collection last! !
-
-!CircularReadStream methodsFor: 'enumerating' stamp: 'mx 9/30/2007 17:52'!
-next
-
-	^self next: (unit with: 1)! !
-
-!CircularReadStream methodsFor: 'enumerating' stamp: 'mx 11/21/2007 09:08'!
-next: aMeasure
-
-	self advancePositions: aMeasure.
-	^self current! !
-
-!CircularReadStream methodsFor: 'enumerating' stamp: 'mx 9/30/2007 17:52'!
-previous
-
-	^self previous: (unit with: 1)! !
-
-!CircularReadStream methodsFor: 'enumerating' stamp: 'mx 11/1/2007 20:32'!
-previous: aMeasure
-
-	^self next: aMeasure negated! !
-
-!CircularReadStream methodsFor: 'querying' stamp: 'mx 11/21/2007 15:24'!
-relativeDistanceFrom: anObject to: anotherObject
-
-	^(collection indexOf: anObject) > (collection indexOf: anotherObject)
-		ifTrue: [(self distanceFrom: anotherObject to: anObject) negated]
-		ifFalse: [self distanceFrom: anObject to: anotherObject]
-! !
-
-!CircularReadStream methodsFor: 'positioning' stamp: 'mx 10/6/2007 15:56'!
-upTo: anObject
-
-	position := collection indexOf: anObject! !
-
-!CircularReadStream methodsFor: 'positioning' stamp: 'mx 11/21/2007 15:24'!
-upToBegin
-
-	position := 1! !
-
-!CircularReadStream methodsFor: 'positioning' stamp: 'mx 11/21/2007 15:24'!
-upToEnd
-
-	position := collection size! !
-
-!CircularReadStream class methodsFor: 'instance creation' stamp: 'mx 11/21/2007 10:28'!
-on: aCollection moving: aUnit
-
-	^self on: aCollection moving: aUnit startingCircleAtIndex: 1! !
-
-!CircularReadStream class methodsFor: 'instance creation' stamp: 'mx 11/21/2007 10:29'!
-on: aCollection moving: aUnit startingCircleAt: anObject
-
-	^self on: aCollection moving: aUnit startingCircleAtIndex: (aCollection indexOf: anObject)! !
-
-!CircularReadStream class methodsFor: 'instance creation' stamp: 'mx 11/21/2007 10:29'!
-on: aCollection moving: aUnit startingCircleAtIndex: anIndex
-
-	^self new initializeOn: aCollection moving: aUnit startingCircleAtIndex: anIndex! !
-
-!ConversionTable methodsFor: 'table setup'!
-addUnitConversionRule: aUnitConvertionRule
-
-	self 
-		removeUnitConversionRuleFrom: aUnitConvertionRule sourceUnit
-		to: aUnitConvertionRule targetUnit
-		ifAbsent: [].
-	unitConversionRules add: aUnitConvertionRule.
-	self invalidateGraph! !
-
-!ConversionTable methodsFor: 'graph management'!
-createGraph 
-
-	graph := Graph edges: self createGraphEdges
-	
-		! !
-
-!ConversionTable methodsFor: 'graph management'!
-createGraphEdges
-
-	| edges |
-	
-	edges := unitConversionRules collect: [ :aConvertionRule | self createUnitConversionRuleToEdgeAdapterFor: aConvertionRule ].
-	^edges
-	
-		! !
-
-!ConversionTable methodsFor: 'table setup - private'!
-createProportionalUnitConversionFunctionWithSource: sourceMeasure andTarget: targetMeasure
-
-	^ProportionalUnitConversionFunction measure: sourceMeasure isProportionalTo: targetMeasure! !
-
-!ConversionTable methodsFor: 'table setup - private'!
-createUnitConversionRuleFrom: aSourceUnit to: aTargetUnit using: anEvaluation
-
-	^UnitConversionRule 
-		from: aSourceUnit baseUnit
-		to: aTargetUnit baseUnit
-		use: anEvaluation! !
-
-!ConversionTable methodsFor: 'graph management'!
-createUnitConversionRuleToEdgeAdapterFor: aUnitConvertionRule
-
-	^UnitConversionRuleToEdgeAdapter for: aUnitConvertionRule! !
-
-!ConversionTable methodsFor: 'table setup'!
-from: aSourceUnit to: aTargetUnit use: aUnitConvertionFunction
-
-	| unitConvertionRule |
-	unitConvertionRule := self createUnitConversionRuleFrom: aSourceUnit to: aTargetUnit using: aUnitConvertionFunction. 
-	self addUnitConversionRule: unitConvertionRule.
-! !
-
-!ConversionTable methodsFor: 'graph management'!
-graph
-
-	graph isNil ifTrue: [ self createGraph ].
-	^graph! !
-
-!ConversionTable methodsFor: 'initialization'!
-initialize
-
-	unitConversionRules := OrderedCollection new.
-	self invalidateGraph! !
-
-!ConversionTable methodsFor: 'graph management'!
-invalidateGraph
-
-	graph := nil! !
-
-!ConversionTable methodsFor: 'table setup'!
-measure: aSourceMeasure convertsTo: aTargetMeasure
-
-	| unitConvertionFunction |
-	unitConvertionFunction := self 
-		createProportionalUnitConversionFunctionWithSource: aSourceMeasure
-		andTarget: aTargetMeasure.
-	self 
-		from: aSourceMeasure unit
-		to: aTargetMeasure unit
-		use: unitConvertionFunction! !
-
-!ConversionTable methodsFor: 'table setup'!
-measure: aSourceMeasure isEquivalentTo: aTargetMeasure
-
-	self measure: aSourceMeasure convertsTo: aTargetMeasure.
-	self measure: aTargetMeasure convertsTo: aSourceMeasure! !
-
-!ConversionTable methodsFor: 'table setup'!
-removeUnitConversionRuleFrom: aSourceUnit to: aTargetUnit
-
-	^self 
-		removeUnitConversionRuleFrom: aSourceUnit
-		to: aTargetUnit
-		ifAbsent: [self signalNoUnitConversionRuleFrom: aSourceUnit to: aTargetUnit]! !
-
-!ConversionTable methodsFor: 'table setup'!
-removeUnitConversionRuleFrom: aSourceUnit to: aTargetUnit ifAbsent: aBlock
-
-	| currentConvertionRule |
-	currentConvertionRule := self 
-		unitConversionRuleFrom: aSourceUnit
-		to: aTargetUnit
-		ifNone: [^aBlock value].
-	unitConversionRules remove: currentConvertionRule.
-	self invalidateGraph! !
-
-!ConversionTable methodsFor: 'exceptions'!
-signalNoUnitConversionRuleFrom: aSourceUnit to: aTargetUnit
-
-	NoUnitConversionRuleException signalWithSourceUnit: aSourceUnit targetUnit: aTargetUnit! !
-
-!ConversionTable methodsFor: 'accessing'!
-unitConversionRuleFrom: aSourceUnit to: aTargetUnit
-
-	^self 
-		unitConversionRuleFrom: aSourceUnit
-		to: aTargetUnit
-		ifNone: [self signalNoUnitConversionRuleFrom: aSourceUnit to: aTargetUnit]! !
-
-!ConversionTable methodsFor: 'accessing'!
-unitConversionRuleFrom: aSourceUnit to: aTargetUnit ifNone: aBlock
-
-	^unitConversionRules 
-		detect: [:aUnitConvertionRule | aUnitConvertionRule convertsFrom: aSourceUnit to: aTargetUnit]
-		ifNone: aBlock! !
-
-!ConversionTable methodsFor: 'accessing'!
-unitConversionRules
-
-	^unitConversionRules copy! !
-
-!ConversionTable class methodsFor: 'instance creation'!
-new
-
-	^super new initialize! !
-
-!MeasureConverter methodsFor: 'testing'!
-canConvert: aSourceMeasure to: aTargetUnit
-
-	[self findPathAndConvert: aSourceMeasure to: aTargetUnit]
-		on: GraphPathNotFoundException
-		do: [:ex | ^ex return: false].
-	^true! !
-
-!MeasureConverter methodsFor: 'converting'!
-convert: aSourceMeasure to: aTargetUnit
-
-	^[aSourceMeasure convertTo: aTargetUnit using: self]
-		on: GraphPathNotFoundException
-		do: [:aSignal |
-			CanNotConvertMeasureException
-				signalSourceMeasure: aSourceMeasure
-				targetUnit: aTargetUnit]! !
-
-!MeasureConverter methodsFor: 'converting - private'!
-convert: aSourceMeasure to: aTargetUnit using: aPath 
-
-	| convertedMeasure |
-	
-	convertedMeasure := aPath edges
-		inject: aSourceMeasure 
-		into: [ :aMeasure :aUnitConvertionRule | aUnitConvertionRule value: aMeasure ].
-
-	^convertedMeasure! !
-
-!MeasureConverter methodsFor: 'converting - private' stamp: 'HAW 3/25/2017 20:17:09'!
-convertCompoundMeasure: aSourceCompoundMeasure to: aTargetUnit
-
-	| targetMeasure |
-	targetMeasure := aSourceCompoundMeasure measures 
-				inject: 0
-				into: 
-					[:convertedMeasure :measureToConvert | 
-					convertedMeasure 
-						+ (self convert: measureToConvert to: aTargetUnit)].
-	^targetMeasure! !
-
-!MeasureConverter methodsFor: 'converting - private'!
-convertMeasure: aSourceMeasure to: aTargetUnit
-
-	| targetMeasure |
-	targetMeasure := (aSourceMeasure unit sameDomainAs: aTargetUnit) 
-		ifTrue: [aSourceMeasure convertTo: aTargetUnit]
-		ifFalse: [self findPathAndConvert: aSourceMeasure to: aTargetUnit].
-	^targetMeasure! !
-
-!MeasureConverter methodsFor: 'converting - private'!
-findPathAndConvert: aSourceMeasure to: aTargetUnit 
-
-	| convertionPath |
-
-	convertionPath := self pathFrom: aSourceMeasure unit to: aTargetUnit.
-	^self 
-		convert: aSourceMeasure
-		to: aTargetUnit
-		using: convertionPath! !
-
-!MeasureConverter methodsFor: 'accessing'!
-graphPathFinder
-	
-	^graphPathFinder! !
-
-!MeasureConverter methodsFor: 'initialization'!
-initializeWith: aGraphPathFinder 
-
-	graphPathFinder := aGraphPathFinder! !
-
-!MeasureConverter methodsFor: 'converting - private'!
-pathFrom: aSourceUnit to: aTargetUnit
-
-	| path |
-	
-	path := self graphPathFinder pathFrom: aSourceUnit to: aTargetUnit.
-	
-	^path.
-	
-	! !
-
-!MeasureConverter class methodsFor: 'instance creation'!
-defaultGraphPathFinder
-
-	^GraphPathFinder! !
-
-!MeasureConverter class methodsFor: 'instance creation'!
-on: aConvertionTable 
-
-	^self with: (self defaultGraphPathFinder on: (aConvertionTable graph))! !
-
-!MeasureConverter class methodsFor: 'instance creation'!
-with: aGraphPathFinder
-
-	^self new initializeWith: aGraphPathFinder! !
-
-!Unit methodsFor: 'mathematic operations'!
-* aNumberOrUnit
-
-	^aNumberOrUnit multiplyByUnit: self! !
-
-!Unit methodsFor: 'mathematic operations'!
-/ aNumberOrUnit
-
-	^aNumberOrUnit divideByUnit: self! !
-
-!Unit methodsFor: 'converting' stamp: 'SeanTAllen 11/28/2009 12:25'!
-adaptToNumber: aNumber andSend: aSelector 
-	^ (NumberToArithmeticObjectAdapter number: aNumber) 
-		perform: aSelector
-		with: self! !
-
-!Unit methodsFor: 'accessing'!
-baseUnit
-
-	^self subclassResponsibility! !
-
-!Unit methodsFor: 'converting'!
-convertAmountToBaseUnit: aNumber
-
-	self subclassResponsibility! !
-
-!Unit methodsFor: 'converting - private'!
-convertToBaseUnit: aMeasure 
-	
-	self subclassResponsibility! !
-
-!Unit methodsFor: 'accessing'!
-denominator
-
-	^NullUnit new! !
-
-!Unit methodsFor: 'accessing'!
-denominatorOf: aNumber
-
-	^self denominator with: aNumber denominator
-	
-! !
-
-!Unit methodsFor: 'mathematic operations'!
-divideByUnit: aNumberOrUnit
-
-	self subclassResponsibility! !
-
-!Unit methodsFor: 'mathematic operations - private'!
-divideDividedUnit: aDividedUnit
-
-	self subclassResponsibility! !
-
-!Unit methodsFor: 'mathematic operations - private'!
-divideInfinity: anInfinity
-
-	^((NullUnit new / self) * anInfinity unit) with: anInfinity amount! !
-
-!Unit methodsFor: 'mathematic operations - private'!
-divideMinusInfinity: aMinusInfinity
-
-	^((NullUnit new / self) * aMinusInfinity unit) with: aMinusInfinity amount! !
-
-!Unit methodsFor: 'mathematic operations - private'!
-divideMultipliedUnit: aMultipliedUnit
-
-	self subclassResponsibility! !
-
-!Unit methodsFor: 'mathematic operations - private'!
-divideNullUnit: aNullUnit 
-
-	self subclassResponsibility! !
-
-!Unit methodsFor: 'mathematic operations - private' stamp: 'HAW 3/25/2017 19:36:30'!
-divideSimpleMeasure: aMeasure
-
-	^((NullUnit new / self) * aMeasure unit) with: aMeasure amount! !
-
-!Unit methodsFor: 'mathematic operations - private'!
-divideSimpleUnit: aUnit
-
-	self subclassResponsibility! !
-
-!Unit methodsFor: 'accessing'!
-doNotImplementHash 
-	
-	"Do not implement hash because its behavior is the same as object
-	See representSameEntityAs:"! !
-
-!Unit methodsFor: 'testing' stamp: 'HernanWilkinson 6/2/2014 11:04'!
-isNamed: aName
- 
-	^ self name sameAs: aName! !
-
-!Unit methodsFor: 'testing' stamp: 'HAW 3/25/2017 18:54:11'!
-isNamedAs: aUnit 
-
-	^ aUnit isNamed: self name! !
-
-!Unit methodsFor: 'testing'!
-isZero
-
-	^self isNothing! !
-
-!Unit methodsFor: 'mathematic operations'!
-multiplyByUnit: aNumberOrUnit
-
-	self subclassResponsibility! !
-
-!Unit methodsFor: 'mathematic operations - private'!
-multiplyDividedUnit: aDividedUnit
-
-	self subclassResponsibility! !
-
-!Unit methodsFor: 'mathematic operations - private'!
-multiplyInfinity: anInfinity
-
-	^(anInfinity unit * self) with: anInfinity amount! !
-
-!Unit methodsFor: 'mathematic operations - private'!
-multiplyMinusInfinity: aMinusInfinity
-
-	^(aMinusInfinity unit * self) with: aMinusInfinity amount! !
-
-!Unit methodsFor: 'mathematic operations - private'!
-multiplyMultipliedUnit: aMultipliedUnit
-
-	self subclassResponsibility! !
-
-!Unit methodsFor: 'mathematic operations - private' stamp: 'HAW 3/25/2017 19:43:17'!
-multiplySimpleMeasure: aMeasure
-
-	^(aMeasure unit * self) with: aMeasure amount! !
-
-!Unit methodsFor: 'mathematic operations - private'!
-multiplySimpleUnit: aUnit
-
-	self subclassResponsibility! !
-
-!Unit methodsFor: 'accessing'!
-name
-
-	^self nameForOne! !
-
-!Unit methodsFor: 'accessing'!
-nameFor: aNumber
-	"It returns the name that must be used to identify an amount <aNumber> of receiver"
-
-	^aNumber unitNameOf: self! !
-
-!Unit methodsFor: 'accessing'!
-nameForMany
-
-	self subclassResponsibility! !
-
-!Unit methodsFor: 'accessing'!
-nameForOne
-
-	self subclassResponsibility! !
-
-!Unit methodsFor: 'accessing'!
-nameForUndefinedAmount
-
-	^self nameForMany! !
-
-!Unit methodsFor: 'accessing'!
-nothingAmount
-
-	self subclassResponsibility! !
-
-!Unit methodsFor: 'accessing' stamp: 'HAW 3/25/2017 19:11:51'!
-nullMeasure
-
-	^SimpleMeasure amount: self baseUnit nothingAmount unit: self baseUnit! !
-
-!Unit methodsFor: 'accessing'!
-numerator
-
-	^self! !
-
-!Unit methodsFor: 'accessing'!
-numeratorOf: aNumber
-
-	^self numerator with: aNumber numerator! !
-
-!Unit methodsFor: 'printing'!
-printOn: aStream
-
-	aStream nextPutAll: self name asString! !
-
-!Unit methodsFor: 'accessing'!
-reciprocal
-
-	^self denominator / self numerator! !
-
-!Unit methodsFor: 'testing'!
-sameDomainAs: aUnit
-
-	^self baseUnit=aUnit baseUnit
-! !
-
-!Unit methodsFor: 'accessing'!
-sign
-
-	self subclassResponsibility! !
-
-!Unit methodsFor: 'measurement creation'!
-with: aNumber
-
-	self subclassResponsibility! !
-
-!Unit class methodsFor: 'accessing'!
-defaultSign
-
-	^'NO SIGN'
-! !
-
-!Unit class methodsFor: 'accessing'!
-nameForManyEndString
-
-	^'s'
-
-! !
-
-!Unit class methodsFor: 'accessing'!
-nameForManyFrom: aString
-
-	^aString , self nameForManyEndString.
-
-! !
-
-!CompoundUnit methodsFor: 'accessing'!
-baseUnit
-
-	^self! !
-
-!CompoundUnit methodsFor: 'converting'!
-convertAmountToBaseUnit: aNumber
-
-	^aNumber! !
-
-!CompoundUnit methodsFor: 'converting - private'!
-convertFromBaseUnit: aMeasure 
-
-	^aMeasure! !
-
-!CompoundUnit methodsFor: 'converting - private'!
-convertToBaseUnit: aMeasure 
-
-	^aMeasure! !
-
-!CompoundUnit methodsFor: 'accessing'!
-hash
-
-	self subclassResponsibility! !
-
-!CompoundUnit methodsFor: 'accessing'!
-nothingAmount
-
-	^0! !
-
-!CompoundUnit methodsFor: 'measurement creation' stamp: 'HAW 3/25/2017 19:11:51'!
-with: aNumber
-
-	^SimpleMeasure amount: aNumber unit: self! !
-
-!DividedUnit methodsFor: 'comparing'!
-= anObject
-
-	^self class = anObject class 
-		and: [ numerator = anObject numerator 
-		and: [ denominator = anObject denominator ]]! !
-
-!DividedUnit methodsFor: 'accessing'!
-denominator
-
-	^denominator! !
-
-!DividedUnit methodsFor: 'mathematic operations'!
-divFrom: aNumber
-
-	^aNumber * self reciprocal! !
-
-!DividedUnit methodsFor: 'mathematic operations'!
-divideByUnit: aUnit
-
-	^aUnit divideDividedUnit: self! !
-
-!DividedUnit methodsFor: 'mathematic operations - private'!
-divideDividedUnit: aDividedUnit
-
-	^self class dividedUnit: self dividedUnit: aDividedUnit! !
-
-!DividedUnit methodsFor: 'mathematic operations - private'!
-divideMultipliedUnit: aMultipliedUnit
-
-	^self class dividedUnit: self multipliedUnit: aMultipliedUnit! !
-
-!DividedUnit methodsFor: 'mathematic operations - private'!
-divideNullUnit: aNullUnit 
-	
-	^self class nullUnit: aNullUnit dividedUnit: self! !
-
-!DividedUnit methodsFor: 'mathematic operations - private'!
-divideSimpleUnit: aUnit
-
-	^self class dividedUnit: self simpleUnit: aUnit! !
-
-!DividedUnit methodsFor: 'accessing'!
-hash
-
-	^numerator hash bitXor: denominator hash! !
-
-!DividedUnit methodsFor: 'initialization'!
-initializeNumerator: aUnit denominator: anotherUnit
-
-	numerator := aUnit.
-	denominator := anotherUnit! !
-
-!DividedUnit methodsFor: 'mathematic operations'!
-multiplyByUnit: aUnit
-
-	^aUnit multiplyDividedUnit: self! !
-
-!DividedUnit methodsFor: 'mathematic operations - private'!
-multiplyDividedUnit: aDividedUnit
-
-	^MultipliedUnit dividedUnit: aDividedUnit dividedUnit: self! !
-
-!DividedUnit methodsFor: 'mathematic operations - private'!
-multiplyMultipliedUnit: aMultipliedUnit
-
-	^MultipliedUnit multipliedUnit: aMultipliedUnit dividedUnit: self! !
-
-!DividedUnit methodsFor: 'mathematic operations - private'!
-multiplySimpleUnit: aUnit
-
-	^MultipliedUnit simpleUnit: aUnit dividedUnit: self! !
-
-!DividedUnit methodsFor: 'accessing'!
-nameForMany
-
-	^numerator nameForMany asString , '/' 
-		, denominator nameForMany asString! !
-
-!DividedUnit methodsFor: 'accessing'!
-nameForOne
-
-	^numerator name asString , '/' , denominator name asString! !
-
-!DividedUnit methodsFor: 'accessing'!
-numerator
-
-	^numerator! !
-
-!DividedUnit methodsFor: 'accessing'!
-sign
-
-	^numerator sign, '/', denominator sign! !
-
-!DividedUnit class methodsFor: 'instance creation - private'!
-dividedUnit: aDividedUnit dividedUnit: anotherDividedUnit
-
-	^(aDividedUnit numerator * anotherDividedUnit denominator) / (aDividedUnit denominator * anotherDividedUnit numerator)
-! !
-
-!DividedUnit class methodsFor: 'instance creation - private'!
-dividedUnit: aDividedUnit multipliedUnit: aMultipliedUnit
-
-	^(aDividedUnit numerator) / (aDividedUnit denominator * aMultipliedUnit)
-! !
-
-!DividedUnit class methodsFor: 'instance creation - private'!
-dividedUnit: aDividedUnit simpleUnit: aUnit
-
-	^(aDividedUnit numerator) / (aDividedUnit denominator * aUnit)
-! !
-
-!DividedUnit class methodsFor: 'instance creation - private'!
-multipliedUnit: aMultipliedUnit dividedUnit: aDividedUnit
-
-	^(aMultipliedUnit * aDividedUnit denominator) / (aDividedUnit numerator)
-! !
-
-!DividedUnit class methodsFor: 'instance creation - private'!
-multipliedUnit: aMultipliedUnit multipliedUnit: anotherMultipliedUnit
-
-	| numeratorFactors denominatorFactors numerator denominator |
-
-	numeratorFactors := aMultipliedUnit factors.
-	denominatorFactors := OrderedCollection new.
-
-	anotherMultipliedUnit factors
-		do: [:aUnit | numeratorFactors remove: aUnit ifAbsent: [denominatorFactors add: aUnit]].
-
-	numerator := MultipliedUnit factors: numeratorFactors.
-	denominator := MultipliedUnit factors: denominatorFactors.
-
-	^denominator = NullUnit new
-		ifTrue: [numerator]
-		ifFalse: [self new initializeNumerator: numerator denominator: denominator]! !
-
-!DividedUnit class methodsFor: 'instance creation - private'!
-multipliedUnit: aMultipliedUnit simpleUnit: aUnit
-
-	| numeratorFactors |
-	
-	numeratorFactors := aMultipliedUnit factors.
-	numeratorFactors remove: aUnit ifAbsent: [ ^self new initializeNumerator: aMultipliedUnit denominator: aUnit ].
-	
-	^MultipliedUnit factors: numeratorFactors
-
-! !
-
-!DividedUnit class methodsFor: 'instance creation - private'!
-nullUnit: aNullUnit dividedUnit: aDividedUnit 
-	
-	^self new initializeNumerator: aDividedUnit denominator denominator: aDividedUnit numerator.! !
-
-!DividedUnit class methodsFor: 'instance creation - private'!
-nullUnit: aNullUnit multipliedUnit: aMultipliedUnit 
-	
-	^self new initializeNumerator: aNullUnit denominator: aMultipliedUnit! !
-
-!DividedUnit class methodsFor: 'instance creation - private'!
-nullUnit: aNullUnit simpleUnit: aSimpleUnit 
-
-	^self new initializeNumerator: aNullUnit denominator: aSimpleUnit
-	! !
-
-!DividedUnit class methodsFor: 'instance creation - private'!
-simpleUnit: aUnit dividedUnit: aDividedUnit
-
-	^(aUnit * aDividedUnit denominator) / (aDividedUnit numerator)
-! !
-
-!DividedUnit class methodsFor: 'instance creation - private'!
-simpleUnit: aUnit multipliedUnit: aMultipliedUnit
-
-	| denominatorFactors |
-	
-	denominatorFactors := aMultipliedUnit factors.
-	denominatorFactors remove: aUnit ifAbsent: [ ^self new initializeNumerator: aUnit denominator: aMultipliedUnit ].
-	
-	"It never can be left NullUnit on NullUnit because aMultipliedUnit has like minimum 2 units"
-	^self new initializeNumerator: NullUnit new denominator: (MultipliedUnit factors: denominatorFactors)! !
-
-!DividedUnit class methodsFor: 'instance creation - private'!
-simpleUnit: aUnit simpleUnit: anotherUnit
-
-	^aUnit=anotherUnit
-		ifTrue: [ NullUnit new ]
-		ifFalse: [ self new initializeNumerator: aUnit denominator: anotherUnit ]! !
-
-!MultipliedUnit methodsFor: 'comparing'!
-= anObject
-
-	^self class = anObject class and: [ self hasSameFactorsAs: anObject ]! !
-
-!MultipliedUnit methodsFor: 'mathematic operations'!
-divFrom: aNumber
-
-	^(DividedUnit nullUnit: aNumber unit multipliedUnit: self) with: aNumber! !
-
-!MultipliedUnit methodsFor: 'mathematic operations'!
-divideByUnit: aUnit
-
-	^aUnit divideMultipliedUnit: self! !
-
-!MultipliedUnit methodsFor: 'mathematic operations - private'!
-divideDividedUnit: aDividedUnit
-
-	^DividedUnit multipliedUnit: self dividedUnit: aDividedUnit! !
-
-!MultipliedUnit methodsFor: 'mathematic operations - private'!
-divideMultipliedUnit: aMultipliedUnit
-
-	^DividedUnit multipliedUnit: self multipliedUnit: aMultipliedUnit! !
-
-!MultipliedUnit methodsFor: 'mathematic operations - private'!
-divideNullUnit: aNullUnit 
-	
-	^DividedUnit nullUnit: aNullUnit multipliedUnit: self! !
-
-!MultipliedUnit methodsFor: 'mathematic operations - private'!
-divideSimpleUnit: aUnit
-
-	^DividedUnit multipliedUnit: self simpleUnit: aUnit! !
-
-!MultipliedUnit methodsFor: 'accessing'!
-factors
-	
-	^factors copy! !
-
-!MultipliedUnit methodsFor: 'accessing'!
-factorsSize
-
-	^factors size! !
-
-!MultipliedUnit methodsFor: 'accessing - private'!
-factorsToStreamDoing: aBlock
-
-	| stream |
-
-	stream := WriteStream on: String new.
-	factors do: [:aUnit |
-		stream nextPutAll: (aBlock value: aUnit).
-		stream nextPut: $.].
-	stream skip: -1.
-	^stream contents! !
-
-!MultipliedUnit methodsFor: 'testing'!
-hasSameFactorsAs: aMultipliedUnit
-	
-	| factorsIntersection |
-	
-	factorsIntersection := aMultipliedUnit factors.
-	factors do: [:aUnit | factorsIntersection remove: aUnit ifAbsent: [ ^false ] ].
-	
-	^factorsIntersection isEmpty
-
-		! !
-
-!MultipliedUnit methodsFor: 'accessing'!
-hash
-
-	^factors inject: 0 into: [ :aHash :aUnit | aHash bitXor: aUnit hash ]! !
-
-!MultipliedUnit methodsFor: 'initialization'!
-initializeFactors: aCollection
-
-	factors := aCollection! !
-
-!MultipliedUnit methodsFor: 'mathematic operations'!
-multiplyByUnit: aUnit
-
-	^aUnit multiplyMultipliedUnit: self! !
-
-!MultipliedUnit methodsFor: 'mathematic operations - private'!
-multiplyDividedUnit: aDividedUnit
-
-	^self class dividedUnit: aDividedUnit multipliedUnit: self! !
-
-!MultipliedUnit methodsFor: 'mathematic operations - private'!
-multiplyMultipliedUnit: aMultipliedUnit
-
-	^self class multipliedUnit: aMultipliedUnit multipliedUnit: self! !
-
-!MultipliedUnit methodsFor: 'mathematic operations - private'!
-multiplySimpleUnit: aUnit
-
-	^self class simpleUnit: aUnit multipliedUnit: self! !
-
-!MultipliedUnit methodsFor: 'accessing'!
-nameForMany
-
-	^self factorsToStreamDoing: [:aUnit | aUnit nameForMany asString]! !
-
-!MultipliedUnit methodsFor: 'accessing'!
-nameForOne
-
-	^self factorsToStreamDoing: [:aUnit | aUnit nameForOne asString]! !
-
-!MultipliedUnit methodsFor: 'accessing'!
-sign
-
-	^self factorsToStreamDoing: [ :aUnit | aUnit sign ]! !
-
-!MultipliedUnit class methodsFor: 'instance creation - private'!
-dividedUnit: aDividedUnit dividedUnit: anotherDividedUnit
-
-	^(aDividedUnit numerator * anotherDividedUnit numerator) / (aDividedUnit denominator * anotherDividedUnit denominator)! !
-
-!MultipliedUnit class methodsFor: 'instance creation - private'!
-dividedUnit: aDividedUnit multipliedUnit: aMultipliedUnit
-
-	^self multipliedUnit: aMultipliedUnit dividedUnit: aDividedUnit! !
-
-!MultipliedUnit class methodsFor: 'instance creation - private'!
-dividedUnit: aDividedUnit simpleUnit: aUnit
-
-	^self simpleUnit: aUnit dividedUnit: aDividedUnit! !
-
-!MultipliedUnit class methodsFor: 'instance creation - private'!
-factors: aCollection
-
-	aCollection isEmpty ifTrue: [ ^NullUnit new ].
-	aCollection size=1 ifTrue: [ ^aCollection first ].
-	^self new initializeFactors: aCollection! !
-
-!MultipliedUnit class methodsFor: 'instance creation - private'!
-multipliedUnit: aMultipliedUnit dividedUnit: aDividedUnit
-
-	^(aMultipliedUnit * aDividedUnit numerator) / (aDividedUnit denominator)! !
-
-!MultipliedUnit class methodsFor: 'instance creation - private'!
-multipliedUnit: aMultipliedUnit multipliedUnit: anotherMultipliedUnit
-
-	| factors |
-	
-	factors := aMultipliedUnit factors.
-	factors addAll: anotherMultipliedUnit factors.
-	
-	^self new initializeFactors: factors.! !
-
-!MultipliedUnit class methodsFor: 'instance creation - private'!
-multipliedUnit: aMultipliedUnit simpleUnit: aUnit
-
-	^self simpleUnit: aUnit multipliedUnit: aMultipliedUnit! !
-
-!MultipliedUnit class methodsFor: 'instance creation - private'!
-simpleUnit: aUnit dividedUnit: aDividedUnit
-
-	^(aUnit * aDividedUnit numerator) / (aDividedUnit denominator)! !
-
-!MultipliedUnit class methodsFor: 'instance creation - private'!
-simpleUnit: aUnit multipliedUnit: aMultipliedUnit
-
-	| factors |
-	
-	factors := aMultipliedUnit factors.
-	factors add: aUnit.
-	
-	^self new initializeFactors: factors! !
-
-!MultipliedUnit class methodsFor: 'instance creation - private'!
-simpleUnit: aUnit simpleUnit: anotherUnit
-
-	^self new initializeFactors: (OrderedCollection with: aUnit with: anotherUnit)! !
-
-!NullUnit methodsFor: 'accessing'!
-baseUnit
-	
-	^self! !
-
-!NullUnit methodsFor: 'converting'!
-convertAmountFromBaseUnit: aNumber
-
-	^0! !
-
-!NullUnit methodsFor: 'converting'!
-convertAmountToBaseUnit: aNumber
-
-	^0! !
-
-!NullUnit methodsFor: 'converting - private'!
-convertFromBaseUnit: aMeasure 
-	
-	^aMeasure! !
-
-!NullUnit methodsFor: 'converting - private'!
-convertToBaseUnit: aMeasure 
-	
-	^aMeasure! !
-
-!NullUnit methodsFor: 'mathematic operations'!
-divideByUnit: aUnit
-
-	^aUnit! !
-
-!NullUnit methodsFor: 'mathematic operations - private'!
-divideDividedUnit: aDividedUnit
-
-	^aDividedUnit reciprocal! !
-
-!NullUnit methodsFor: 'mathematic operations - private'!
-divideMultipliedUnit: aMultipliedUnit
-
-	^DividedUnit nullUnit: self multipliedUnit: aMultipliedUnit! !
-
-!NullUnit methodsFor: 'mathematic operations - private'!
-divideNullUnit: aNullUnit 
-	
-	^self! !
-
-!NullUnit methodsFor: 'mathematic operations - private'!
-divideSimpleUnit: aUnit
-
-	^DividedUnit nullUnit: self simpleUnit: aUnit! !
-
-!NullUnit methodsFor: 'mathematic operations'!
-multiplyByUnit: aUnit
-
-	^aUnit! !
-
-!NullUnit methodsFor: 'mathematic operations - private'!
-multiplyDividedUnit: aDividedUnit
-
-	^aDividedUnit! !
-
-!NullUnit methodsFor: 'mathematic operations - private'!
-multiplyMultipliedUnit: aMultipliedUnit
-
-	^aMultipliedUnit! !
-
-!NullUnit methodsFor: 'mathematic operations - private'!
-multiplySimpleUnit: aUnit
-
-	^aUnit! !
-
-!NullUnit methodsFor: 'accessing'!
-name
-
-	^''! !
-
-!NullUnit methodsFor: 'accessing'!
-nameForMany
-
-	^self name! !
-
-!NullUnit methodsFor: 'accessing'!
-nameForOne
-
-	^self name! !
-
-!NullUnit methodsFor: 'accessing'!
-nothingAmount
-	
-	^0! !
-
-!NullUnit methodsFor: 'accessing'!
-sign
-
-	^self class defaultSign! !
-
-!NullUnit methodsFor: 'measurement creation'!
-with: aNumber
-
-	^aNumber! !
-
-!NullUnit class methodsFor: 'initialization' stamp: 'HAW 3/25/2017 21:00:31'!
-afterLoadInitialization
-
-	self initialize! !
-
-!NullUnit class methodsFor: 'initialization' stamp: 'HAW 3/25/2017 20:59:51'!
-initialize
-
-	uniqueInstance isNil ifTrue: [ self initializeUniqueInstance ]! !
-
-!NullUnit class methodsFor: 'initialization' stamp: 'HernanWilkinson 11/28/2009 19:04'!
-initializeUniqueInstance
-
-	uniqueInstance := super new.! !
-
-!NullUnit class methodsFor: 'instance creation' stamp: 'HernanWilkinson 11/28/2009 22:11'!
-new
-
-	^uniqueInstance! !
-
-!SimpleUnit methodsFor: 'mathematic operations' stamp: 'HAW 3/25/2017 19:11:51'!
-divFrom: aNumber
-
-	^SimpleMeasure amount: aNumber unit: NullUnit new / self! !
-
-!SimpleUnit methodsFor: 'mathematic operations'!
-divideByUnit: aUnit
-
-	^aUnit divideSimpleUnit: self! !
-
-!SimpleUnit methodsFor: 'mathematic operations - private'!
-divideDividedUnit: aDividedUnit
-
-	^DividedUnit simpleUnit: self dividedUnit: aDividedUnit! !
-
-!SimpleUnit methodsFor: 'mathematic operations - private'!
-divideMultipliedUnit: aMultipliedUnit
-
-	^DividedUnit simpleUnit: self multipliedUnit: aMultipliedUnit! !
-
-!SimpleUnit methodsFor: 'mathematic operations - private'!
-divideNullUnit: aNullUnit 
-
-	^DividedUnit nullUnit: aNullUnit simpleUnit: self! !
-
-!SimpleUnit methodsFor: 'mathematic operations - private'!
-divideSimpleUnit: aUnit
-
-	^DividedUnit simpleUnit: self simpleUnit: aUnit
-! !
-
-!SimpleUnit methodsFor: 'mathematic operations'!
-multiplyByUnit: aUnit
-
-	^aUnit multiplySimpleUnit: self! !
-
-!SimpleUnit methodsFor: 'mathematic operations - private'!
-multiplyDividedUnit: aDividedUnit
-
-	^MultipliedUnit dividedUnit: aDividedUnit simpleUnit: self! !
-
-!SimpleUnit methodsFor: 'mathematic operations - private'!
-multiplyMultipliedUnit: aMultipliedUnit
-
-	^MultipliedUnit multipliedUnit: aMultipliedUnit simpleUnit: self! !
-
-!SimpleUnit methodsFor: 'mathematic operations - private'!
-multiplySimpleUnit: aUnit
-
-	^MultipliedUnit simpleUnit: self simpleUnit: aUnit! !
-
-!SimpleUnit methodsFor: 'measurement creation' stamp: 'HAW 3/25/2017 19:11:51'!
-with: aNumber
-
-	^SimpleMeasure amount: aNumber unit: self! !
-
-!BaseUnit methodsFor: 'comparing' stamp: 'HernanWilkinson 5/14/2012 17:34'!
-= anObject
-
-	^ (anObject isKindOf: self class) and: [ self name = anObject name ]! !
-
-!BaseUnit methodsFor: 'accessing'!
-baseUnit
-	
-	^self! !
-
-!BaseUnit methodsFor: 'converting'!
-convertAmountToBaseUnit: aNumber
-
-	^aNumber
-! !
-
-!BaseUnit methodsFor: 'converting - private'!
-convertFromBaseUnit: aMeasure 
-	
-	^aMeasure! !
-
-!BaseUnit methodsFor: 'converting - private'!
-convertToBaseUnit: aMeasure 
-	
-	^aMeasure! !
-
-!BaseUnit methodsFor: 'initialization'!
-initializeNameFomOne: aString nameForMany: anotherString sign: aSignString
-
-	nameForOne := aString.
-	nameForMany := anotherString.
-	sign := aSignString.! !
-
-!BaseUnit methodsFor: 'accessing'!
-nameForMany
-
-	^nameForMany! !
-
-!BaseUnit methodsFor: 'accessing'!
-nameForOne
-
-	^nameForOne! !
-
-!BaseUnit methodsFor: 'accessing'!
-nothingAmount
-
-	^0! !
-
-!BaseUnit methodsFor: 'accessing'!
-sign
-
-	^sign! !
-
-!BaseUnit class methodsFor: 'instance creation'!
-nameForOne: aString nameForMany: anotherString
-
-	^self new initializeNameFomOne: aString nameForMany: anotherString sign: self defaultSign! !
-
-!BaseUnit class methodsFor: 'instance creation'!
-nameForOne: aString nameForMany: anotherString sign: aSignString
-
-	^self new initializeNameFomOne: aString nameForMany: anotherString sign: aSignString! !
-
-!BaseUnit class methodsFor: 'instance creation'!
-named: aString 
-
-	^self 
-		nameForOne: aString
-		nameForMany: (self nameForManyFrom: aString)
-		sign: self defaultSign.
-! !
-
-!BaseUnit class methodsFor: 'instance creation'!
-named: aString sign: aSignString
-
-	^self 
-		nameForOne: aString
-		nameForMany: (self nameForManyFrom: aString)
-		sign: aSignString
-! !
-
-!DerivedUnit methodsFor: 'converting - private'!
-convertAmountFromBaseUnit: aNumber
-
-	self subclassResponsibility! !
-
-!DerivedUnit methodsFor: 'converting - private' stamp: 'HAW 3/25/2017 19:11:51'!
-convertFromBaseUnit: aSimpleMeasure 
-
-	^SimpleMeasure amount: (self convertAmountFromBaseUnit: aSimpleMeasure amount) unit: self! !
-
-!DerivedUnit methodsFor: 'converting - private' stamp: 'HAW 3/25/2017 19:11:51'!
-convertToBaseUnit: aSimpleMeasure 
-	
-	^SimpleMeasure 
-		amount: (self convertAmountToBaseUnit: aSimpleMeasure amount)
-		unit: self baseUnit! !
-
-!DerivedUnit methodsFor: 'accessing'!
-nothingAmount
-
-	^self convertAmountFromBaseUnit: self baseUnit nothingAmount! !
-
-!NotProportionalDerivedUnit methodsFor: 'accessing'!
-baseUnit
-
-	^baseUnit! !
-
-!NotProportionalDerivedUnit methodsFor: 'converting - private'!
-convertAmountFromBaseUnit: aNumber
-
-	^reciprocalConversionBlock value: aNumber! !
-
-!NotProportionalDerivedUnit methodsFor: 'converting'!
-convertAmountToBaseUnit: aNumber
-
-	^conversionBlock value: aNumber! !
-
-!NotProportionalDerivedUnit methodsFor: 'initialization'!
-initializeBaseUnit: aUnit conversionBlock: aBlock reciprocalConversionBlock: anotherBlock nameForOne: aString nameForMany: anotherString sign: aSignString
-
-	baseUnit := aUnit.
-	conversionBlock := aBlock.
-	reciprocalConversionBlock := anotherBlock.
-	nameForOne := aString.
-	nameForMany := anotherString.
-	sign := aSignString! !
-
-!NotProportionalDerivedUnit methodsFor: 'accessing'!
-nameForMany
-
-	^nameForMany! !
-
-!NotProportionalDerivedUnit methodsFor: 'accessing'!
-nameForOne
-
-	^nameForOne! !
-
-!NotProportionalDerivedUnit methodsFor: 'accessing'!
-sign
-
-	^sign! !
-
-!NotProportionalDerivedUnit class methodsFor: 'instance creation'!
-baseUnit: aUnit conversionBlock: aBlock reciprocalConversionBlock: anotherBlock nameForOne: aString nameForMany: anotherString sign: aSignString 
-
-	^self new 
-		initializeBaseUnit: aUnit
-		conversionBlock: aBlock
-		reciprocalConversionBlock: anotherBlock
-		nameForOne: aString
-		nameForMany: anotherString
-		sign: aSignString! !
-
-!NotProportionalDerivedUnit class methodsFor: 'instance creation'!
-baseUnit: aUnit conversionBlock: aBlock reciprocalConversionBlock: anotherBlock named: aString
-
-	^self 
-		baseUnit: aUnit
-		conversionBlock: aBlock
-		reciprocalConversionBlock: anotherBlock
-		nameForOne: aString
-		nameForMany: (self nameForManyFrom: aString)
-		sign: self defaultSign! !
-
-!NotProportionalDerivedUnit class methodsFor: 'instance creation'!
-baseUnit: aUnit conversionBlock: aBlock reciprocalConversionBlock: anotherBlock named: aString sign: aSignString
-
-	^self 
-		baseUnit: aUnit
-		conversionBlock: aBlock
-		reciprocalConversionBlock: anotherBlock
-		nameForOne: aString
-		nameForMany: (self nameForManyFrom: aString)
-		sign: aSignString! !
-
-!ProportionalDerivedUnit methodsFor: 'accessing'!
-baseUnit
-
-	^baseUnit! !
-
-!ProportionalDerivedUnit methodsFor: 'accessing'!
-conversionFactor
-	
-	^conversionFactor! !
-
-!ProportionalDerivedUnit methodsFor: 'converting - private'!
-convertAmountFromBaseUnit: aNumber
-
-	^aNumber / conversionFactor! !
-
-!ProportionalDerivedUnit methodsFor: 'converting'!
-convertAmountToBaseUnit: aNumber
-
-	^aNumber * conversionFactor! !
-
-!ProportionalDerivedUnit methodsFor: 'initialization'!
-initializeBaseUnit: aUnit conversionFactor: aNumber nameForOne: aString nameForMany: anotherString sign: aSignString
-
-	baseUnit := aUnit.
-	conversionFactor := aNumber.
-	nameForOne := aString.
-	nameForMany := anotherString.
-	sign := aSignString! !
-
-!ProportionalDerivedUnit methodsFor: 'accessing'!
-nameForMany
-
-	^nameForMany! !
-
-!ProportionalDerivedUnit methodsFor: 'accessing'!
-nameForOne
-
-	^nameForOne! !
-
-!ProportionalDerivedUnit methodsFor: 'accessing'!
-sign
-
-	^sign! !
-
-!ProportionalDerivedUnit class methodsFor: 'instance creation'!
-baseUnit: aUnit conversionFactor: aNumber nameForOne: aString nameForMany: anotherString sign: aSignString
-
-	^self new 
-		initializeBaseUnit: aUnit
-		conversionFactor: aNumber
-		nameForOne: aString
-		nameForMany: anotherString
-		sign: aSignString! !
-
-!ProportionalDerivedUnit class methodsFor: 'instance creation'!
-baseUnit: aUnit conversionFactor: aNumber named: aString
-
-	^self 
-		baseUnit: aUnit
-		conversionFactor: aNumber
-		nameForOne: aString
-		nameForMany: (self nameForManyFrom: aString)
-		sign: self defaultSign! !
-
-!ProportionalDerivedUnit class methodsFor: 'instance creation'!
-baseUnit: aUnit conversionFactor: aNumber named: aString sign: aSignString
-
-	^self 
-		baseUnit: aUnit
-		conversionFactor: aNumber
-		nameForOne: aString
-		nameForMany: (self nameForManyFrom: aString)
-		sign: aSignString! !
-
-!UnitConversionFunctionInterface methodsFor: 'evaluating'!
-value: anObject
-
-	^self subclassResponsibility! !
-
-!ProportionalUnitConversionFunction methodsFor: 'comparing'!
-= anotherProportionalUnitConvertionFunction
-
-	^self class=anotherProportionalUnitConvertionFunction class and: 
-		[ sourceMeasure=anotherProportionalUnitConvertionFunction sourceMeasure and: 
-		[ equivalentMeasure=anotherProportionalUnitConvertionFunction equivalentMeasure ] ]! !
-
-!ProportionalUnitConversionFunction methodsFor: 'accessing'!
-equivalentMeasure
-
-	^equivalentMeasure! !
-
-!ProportionalUnitConversionFunction methodsFor: 'accessing'!
-hash
-
-	^sourceMeasure hash bitXor: equivalentMeasure hash.
-! !
-
-!ProportionalUnitConversionFunction methodsFor: 'initialization'!
-initializeMeasure: aSourceMeasure isEquivalentTo: aEquivalentMeasure
-
-	sourceMeasure := aSourceMeasure.
-	equivalentMeasure := aEquivalentMeasure.
-	proportionalMeasure := aEquivalentMeasure / aSourceMeasure! !
-
-!ProportionalUnitConversionFunction methodsFor: 'printing'!
-printOn: aStream
-
-	equivalentMeasure printOn: aStream.
-	aStream nextPutAll: ' / '.
-	sourceMeasure printOn: aStream.
-	aStream nextPutAll: '* valueToConvert'! !
-
-!ProportionalUnitConversionFunction methodsFor: 'accessing'!
-proportionalMeasure 
-
-	^proportionalMeasure
-! !
-
-!ProportionalUnitConversionFunction methodsFor: 'accessing'!
-sourceMeasure 
-
-	^sourceMeasure
-! !
-
-!ProportionalUnitConversionFunction methodsFor: 'evaluating'!
-value: aMeasure
-
-	^proportionalMeasure * aMeasure! !
-
-!ProportionalUnitConversionFunction class methodsFor: 'instance creation'!
-assertCreationPreconditions: aSourceMeasure equivalentMeasure: aEquivalentMeasure
-
-	(aSourceMeasure isNothing 
-		or: [aSourceMeasure sameDomainAs: aEquivalentMeasure]) 
-			ifTrue: 
-				[InvalidProportionalUnitConversionFunctionException 
-					signalSourceMeasure: aSourceMeasure
-					equivalentMeasure: aEquivalentMeasure]! !
-
-!ProportionalUnitConversionFunction class methodsFor: 'instance creation'!
-measure: aSourceMeasure isProportionalTo: aEquivalentMeasure
-
-	self assertCreationPreconditions: aSourceMeasure
-		equivalentMeasure: aEquivalentMeasure.
-	^self new initializeMeasure: aSourceMeasure
-		isEquivalentTo: aEquivalentMeasure! !
-
-!UnitConversionRuleInterface methodsFor: 'converting'!
-convertsFrom: aSourceUnit to: aTargetUnit
-
-	^(self sourceUnit sameDomainAs: aSourceUnit) and: [ self targetUnit sameDomainAs: aTargetUnit ]! !
-
-!UnitConversionRuleInterface methodsFor: 'converting'!
-convertsSameDomainsAs: aUnitConvertionRule
-
-	^self convertsFrom: aUnitConvertionRule sourceUnit to: aUnitConvertionRule targetUnit! !
-
-!UnitConversionRuleInterface methodsFor: 'accessing'!
-function
-
-	self subclassResponsibility! !
-
-!UnitConversionRuleInterface methodsFor: 'accessing'!
-sourceUnit
-
-	self subclassResponsibility! !
-
-!UnitConversionRuleInterface methodsFor: 'accessing'!
-targetUnit
-
-	self subclassResponsibility! !
-
-!UnitConversionRuleInterface methodsFor: 'converting'!
-value: aMeasure
-
-	self subclassResponsibility! !
-
-!UnitConversionRule methodsFor: 'comparing'!
-= anotherConvertionRule
-
-	^self class=anotherConvertionRule class and: 
-		[ (self convertsSameDomainsAs: anotherConvertionRule) and:
-		[ function=anotherConvertionRule function ] ].! !
-
-!UnitConversionRule methodsFor: 'accessing'!
-function
-
-	^function! !
-
-!UnitConversionRule methodsFor: 'accessing'!
-hash
-
-	^sourceUnit hash bitXor: targetUnit hash.! !
-
-!UnitConversionRule methodsFor: 'initialization'!
-initializeFrom: aSourceUnit to: aTargetUnit using: aFunction
-
-	sourceUnit := aSourceUnit.
-	targetUnit := aTargetUnit.
-	function := aFunction! !
-
-!UnitConversionRule methodsFor: 'printing'!
-printOn: aStream
-
-	sourceUnit printOn: aStream.
-	aStream nextPutAll: ' -> '.
-	targetUnit printOn: aStream.
-	aStream nextPutAll: ': '.
-	function printOn: aStream! !
-
-!UnitConversionRule methodsFor: 'accessing'!
-sourceUnit
-
-	^sourceUnit! !
-
-!UnitConversionRule methodsFor: 'accessing'!
-targetUnit
-
-	^targetUnit! !
-
-!UnitConversionRule methodsFor: 'converting'!
-value: aMeasure
-
-	^function value: aMeasure! !
-
-!UnitConversionRule class methodsFor: 'instance creation'!
-from: aSourceUnit to: aTargetUnit use: aFunction
-
-	^self new initializeFrom: aSourceUnit to: aTargetUnit using: aFunction! !
-
-!UnitConversionRuleToEdgeAdapter methodsFor: 'comparing'!
-= anotherConvertionRuleToEdgeAdapter
-
-	^self class=anotherConvertionRuleToEdgeAdapter class and: 
-		[ unitConversionRule=anotherConvertionRuleToEdgeAdapter unitConversionRule ]
-	! !
-
-!UnitConversionRuleToEdgeAdapter methodsFor: 'edge protocol'!
-convergesTo: aUnit
-
-	^unitConversionRule targetUnit sameDomainAs: aUnit
-	! !
-
-!UnitConversionRuleToEdgeAdapter methodsFor: 'edge protocol'!
-convergesToSelf
-
-	^unitConversionRule sourceUnit sameDomainAs: unitConversionRule targetUnit
-	! !
-
-!UnitConversionRuleToEdgeAdapter methodsFor: 'accessing'!
-function
-
-	^unitConversionRule function! !
-
-!UnitConversionRuleToEdgeAdapter methodsFor: 'edge protocol'!
-goesFrom: aSourceUnit to: aTargetUnit
-
-	^unitConversionRule convertsFrom: aSourceUnit to: aTargetUnit
-	! !
-
-!UnitConversionRuleToEdgeAdapter methodsFor: 'edge protocol'!
-hash
-
-	^unitConversionRule hash
-	! !
-
-!UnitConversionRuleToEdgeAdapter methodsFor: 'initialization'!
-initializeWith: aConvertionRule
-
-	unitConversionRule := aConvertionRule! !
-
-!UnitConversionRuleToEdgeAdapter methodsFor: 'printing'!
-printOn: aStream
-
-	unitConversionRule printOn: aStream! !
-
-!UnitConversionRuleToEdgeAdapter methodsFor: 'edge protocol'!
-source
-
-	^unitConversionRule sourceUnit! !
-
-!UnitConversionRuleToEdgeAdapter methodsFor: 'accessing'!
-sourceUnit
-
-	^unitConversionRule sourceUnit! !
-
-!UnitConversionRuleToEdgeAdapter methodsFor: 'edge protocol'!
-startsOn: aUnit
-
-	^unitConversionRule sourceUnit sameDomainAs: aUnit! !
-
-!UnitConversionRuleToEdgeAdapter methodsFor: 'edge protocol'!
-target
-
-	^unitConversionRule targetUnit! !
-
-!UnitConversionRuleToEdgeAdapter methodsFor: 'accessing'!
-targetUnit
-
-	^unitConversionRule targetUnit! !
-
-!UnitConversionRuleToEdgeAdapter methodsFor: 'accessing'!
-unitConversionRule
-
-	^unitConversionRule! !
-
-!UnitConversionRuleToEdgeAdapter methodsFor: 'converting'!
-value: aMeasure
-
-	^unitConversionRule value: aMeasure! !
-
-!UnitConversionRuleToEdgeAdapter class methodsFor: 'instance creation'!
-for: aConvertionRule
-
-	^self new initializeWith: aConvertionRule! !
+NullUnit initialize!
 InfinityDefinition initialize!
 MinusInfinityDefinition initialize!
-ArithmeticObjectIntervalStrategy initialize!
 InfinityIntervalStrategy initialize!
-NullUnit initialize!
+ArithmeticObjectIntervalStrategy initialize!
