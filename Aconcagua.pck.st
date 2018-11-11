@@ -1,6 +1,6 @@
-'From Cuis 5.0 of 7 November 2016 [latest update: #3429] on 27 August 2018 at 8:51:17 am'!
-'Description New units gram, milligram, joule'!
-!provides: 'Aconcagua' 1 5!
+'From Cuis 5.0 of 7 November 2016 [latest update: #3485] on 11 November 2018 at 10:47:38 am'!
+'Description Renamed some units to English'!
+!provides: 'Aconcagua' 1 6!
 SystemOrganization addCategory: #'Aconcagua-MeasureModel'!
 SystemOrganization addCategory: #'Aconcagua-ArithmeticModel'!
 SystemOrganization addCategory: #'Aconcagua-ArithmeticModelTests'!
@@ -9652,7 +9652,7 @@ kelvin
 
 	^units at: self kelvinName! !
 
-!UnitsTestResource methodsFor: 'temperature units - creating'!
+!UnitsTestResource methodsFor: 'temperature units - creating' stamp: 'HAW 11/11/2018 10:28:23'!
 createCelsius
 
 	^NotProportionalDerivedUnit 
@@ -9660,7 +9660,7 @@ createCelsius
 		conversionBlock:  [:kelvin | kelvin + (5463/20)] 
 		reciprocalConversionBlock: [ :celsius | celsius - (5463/20) ]
 		named: self celsiusName 
-		sign: '¦Ç¬¨¦Ç¬ù'! !
+		sign: '�'! !
 
 !UnitsTestResource methodsFor: 'temperature units - creating'!
 createFahrenheit 
@@ -9678,10 +9678,10 @@ createKelvin
 
 	^BaseUnit named: self kelvinName sign: 'K'! !
 
-!UnitsTestResource methodsFor: 'temperature units - naming'!
+!UnitsTestResource methodsFor: 'temperature units - naming' stamp: 'HAW 11/11/2018 10:28:45'!
 celsiusName
 
-	^'gradoCentigrado'! !
+	^'celsius'! !
 
 !UnitsTestResource methodsFor: 'temperature units - naming'!
 fahrenheitName
@@ -9713,15 +9713,15 @@ createSecond
 
 	^BaseUnit named: self secondName! !
 
-!UnitsTestResource methodsFor: 'time units - naming'!
+!UnitsTestResource methodsFor: 'time units - naming' stamp: 'HAW 11/11/2018 10:46:02'!
 minuteName
 
-	^'minuto'! !
+	^'minute'! !
 
-!UnitsTestResource methodsFor: 'time units - naming'!
+!UnitsTestResource methodsFor: 'time units - naming' stamp: 'HAW 11/11/2018 10:46:07'!
 secondName
 
-	^'segundo'! !
+	^'second'! !
 
 !UnitsTestResource methodsFor: 'weight units - creating' stamp: 'RNG 8/26/2018 17:43:03'!
 createGram
